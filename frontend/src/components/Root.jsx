@@ -1,14 +1,16 @@
-import Header from "./Header";
+import Header from "./Header/Header";
 import Footer from "./Footer";
-import { Outlet } from 'react-router-dom'
+import { Outlet } from "react-router-dom";
 function Root() {
   return (
     <>
-    <Header />
-      <Outlet />
-    <Footer/>
+      <Header />
+      <div className="container">
+        <Outlet />
+      </div>
+      <Footer />
     </>
-  )
+  );
 }
 
-export default Root
+export default Root;
