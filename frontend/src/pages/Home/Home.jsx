@@ -1,4 +1,5 @@
 import classes from "./Home.module.css";
+import { Link } from "react-router-dom";
 import img from "../../assets/dish1.jpg";
 export default function Home() {
   return (
@@ -38,7 +39,9 @@ export default function Home() {
             </div>
             <div className="col-md-2 col-lg-1 col-sm-2">
               <button className="btn btn-warning " type="submit">
-                Search
+                <Link className="nav-link" to="/resturants">
+                  Search
+                </Link>
               </button>
             </div>
           </div>

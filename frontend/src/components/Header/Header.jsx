@@ -92,7 +92,12 @@ function Header() {
   // const buttonsInRestaurantPageWithoutReg
 
   return (
-    <nav className={`navbar navbar-expand-lg bg-body-tertiary ${styles.transparentNavbar } navbar-dark`} style={{ backgroundColor: 'transparent !important' }}>
+    <nav
+      className={`navbar navbar-expand-lg bg-body-tertiary ${
+        !inRestaurantPage ? styles.transparentNavbar : null
+      }  ${!inRestaurantPage ? "navbar-dark" : null}`}
+      style={{ backgroundColor: "transparent !important" }}
+    >
       <div className="container">
         <Link className="navbar-brand" to="/">
           Navbar

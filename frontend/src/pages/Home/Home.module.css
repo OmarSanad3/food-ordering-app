@@ -17,7 +17,7 @@ img {
   max-width: 600px;
   margin: 0 auto;
 }
-h1{
+h1 {
   font-size: 3.5rem !important;
 }
 /*  */
@@ -27,6 +27,5 @@ h1{
     line-height: 1.5 !important;
     max-width: 400px;
     margin: 0 auto;
-    
   }
 }
