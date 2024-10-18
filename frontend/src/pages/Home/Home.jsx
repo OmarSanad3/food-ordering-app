@@ -6,6 +6,7 @@ export default function Home() {
     <div className="container">
       <div className={classes.overlay}>
         <div className = {classes.backgoundImage}>
+
           <img src={img} alt="dish" />
         </div>
         <div className={`${classes.maxWidth} text-center text-light`}>

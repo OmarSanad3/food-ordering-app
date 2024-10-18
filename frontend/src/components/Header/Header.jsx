@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
+import mylogo from "../../images/Screenshot_2024-10-17_183239-removebg-preview.png"
 import styles from "./Header.module.css";
 import logo from "../../assets/logowithout.png";
 function Header() {
@@ -106,6 +107,7 @@ function Header() {
             <img src={logo} alt="Logo" className="d-inline-block align-text-top"/>
             <p className = "fw-bold d-inline-block fs-4">Foodzy</p>
           </div>
+
         </Link>
 
         <div>
