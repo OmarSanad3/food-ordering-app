@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
 import mylogo from "../../images/Screenshot_2024-10-17_183239-removebg-preview.png"
 import styles from "./Header.module.css";
+import logo from "../../assets/logowithout.png";
 function Header() {
   const { isRegister, inRestaurantPage } = useContext(AppContext);
   const SignInAndLogin = (
@@ -20,6 +21,7 @@ function Header() {
       </li>
     </>
   );
+
   const buttonsInRestaurantPage = (
     <>
       {isRegister ? (
@@ -101,7 +103,11 @@ function Header() {
     >
       <div className="container">
         <Link className="navbar-brand" to="/">
-          <img src={mylogo} alt="logo" width="144" height="44"/>
+          <div className={`${styles.logo} d-flex align-item-center `}>
+            <img src={logo} alt="Logo" className="d-inline-block align-text-top"/>
+            <p className = "fw-bold d-inline-block fs-4">Foodzy</p>
+          </div>
+
         </Link>
 
         <div>

@@ -1,6 +1,8 @@
 import { useEffect, useContext } from "react";
 import { AppContext } from "../../context/AppContext";
-
+import Card from "../../components/Card/Card";
+import SideBar from "../../components/SideBar/SideBar";
+import { Link } from "react-router-dom";
 function RestaurantPage() {
   // Access the context to update the `inRestaurantPage` state
   const { setRestaurantPage } = useContext(AppContext);
@@ -15,26 +17,41 @@ function RestaurantPage() {
   }, [setRestaurantPage]);
 
   return (
-    <div className="restaurant-page">
-      <h1>Welcome to the Restaurant Page</h1>
-      <p>
-        Here you can browse our list of top restaurants, view menus, and make
-        reservations!
-      </p>
+    <div className="row restaurant-page mt-5">
+      <div className="col-3">
+        <SideBar />
+      </div>
 
-      <div className="restaurant-list">
-        <h2>Top Restaurants</h2>
-        <ul>
-          <li>
-            Restaurant A - <a href="/restaurants/1">View Details</a>
-          </li>
-          <li>
-            Restaurant B - <a href="/restaurants/2">View Details</a>
-          </li>
-          <li>
-            Restaurant C - <a href="/restaurants/3">View Details</a>
-          </li>
-        </ul>
+      <div className="container text-center col-9">
+        <div className="row g-4 ">
+          <div className="col ">
+           <Link to = "menu" >  <Card /> </Link>
+          </div>
+          <div className="col ">
+            <Card />
+          </div>
+          <div className="col ">
+            <Card />
+          </div>
+          <div className="col ">
+            <Card />
+          </div>
+          <div className="col ">
+            <Card />
+          </div>
+          <div className="col ">
+            <Card />
+          </div>
+          <div className="col ">
+            <Card />
+          </div>
+          <div className="col ">
+            <Card />
+          </div>
+          <div className="col ">
+            <Card />
+          </div>
+        </div>
       </div>
     </div>
   );
