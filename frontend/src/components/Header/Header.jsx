@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
+import mylogo from "../../images/Screenshot_2024-10-17_183239-removebg-preview.png"
 import styles from "./Header.module.css";
 function Header() {
   const { isRegister, inRestaurantPage } = useContext(AppContext);
@@ -100,7 +101,7 @@ function Header() {
     >
       <div className="container">
         <Link className="navbar-brand" to="/">
-          Navbar
+          <img src={mylogo} alt="logo" width="144" height="44"/>
         </Link>
 
         <div>
