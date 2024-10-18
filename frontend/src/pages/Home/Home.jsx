@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div className="container">
       <div className={classes.overlay}>
-        <div className = {classes.backgoundImage}>
+        <div className = {classes.backgroundImage}>
 
           <img src={img} alt="dish" />
         </div>
