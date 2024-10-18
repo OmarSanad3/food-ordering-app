@@ -45,7 +45,7 @@ function Header() {
           placeholder="Search"
           aria-label="Search"
         />
-        <button className="btn btn-outline-success" type="submit">
+        <button className="btn btn-outline-warning" type="submit">
           Search
         </button>
       </form>
