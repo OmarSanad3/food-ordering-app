@@ -18,11 +18,11 @@ function RestaurantPage() {
 
   return (
     <div className="row restaurant-page mt-5">
-      <div className="col-3">
+      <div className="col-2">
         <SideBar />
       </div>
 
-      <div className="container text-center col-9">
+      <div className="container text-center col-md-10 col-sm-12">
         <div className="row g-4 ">
           <div className="col ">
            <Link to = "menu" >  <Card /> </Link>
