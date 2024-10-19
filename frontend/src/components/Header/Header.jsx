@@ -4,7 +4,7 @@ import { AppContext } from "../../context/AppContext";
 import styles from "./Header.module.css";
 import logo from "../../images/Screenshot_2024-10-17_183239-removebg-preview.png";
 function Header() {
-  const { isRegister, inRestaurantPage } = useContext(AppContext);
+  const { isRegistered, inHomePage } = useContext(AppContext);
   const SignInAndLogin = (
     <>
       <li>
@@ -21,9 +21,9 @@ function Header() {
     </>
   );
 
-  const buttonsInRestaurantPage = (
+  const buttonPages = (
     <>
-      {isRegister ? (
+      {isRegistered ? (
         <li>
           <Link className="nav-link" to="/">
             Notification
@@ -31,7 +31,7 @@ function Header() {
         </li>
       ) : null}
 
-      {isRegister ? (
+      {isRegistered ? (
         <li>
           <Link className="nav-link" to="/">
             My orders
@@ -80,7 +80,7 @@ function Header() {
           </li>
         </ul>
       </li>
-      {isRegister ? (
+      {isRegistered ? (
         <li>
           <Link className="nav-link" to="/">
             Profile
@@ -91,32 +91,35 @@ function Header() {
       )}
     </>
   );
-  // const buttonsInRestaurantPageWithoutReg
-
+  // const buttonPagesWithoutReg
+  console.log(isRegistered);
+  
   return (
     <nav
       className={`navbar navbar-expand-lg bg-body-tertiary ${
-        !inRestaurantPage ? styles.transparentNavbar : null
-      }  ${!inRestaurantPage ? "navbar-dark" : null}`}
+        inHomePage ? styles.transparentNavbar : null
+      }  ${inHomePage ? "navbar-dark" : null}`}
       style={{ backgroundColor: "transparent !important" }}
     >
       <div className="container">
         <Link className="navbar-brand" to="/">
           <div className={`${styles.logo} d-flex align-item-center `}>
-            <img src={logo} alt="Logo" className="d-inline-block align-text-top"/>
-          
+            <img
+              src={logo}
+              alt="Logo"
+              className="d-inline-block align-text-top"
+            />
           </div>
-
         </Link>
 
         <div>
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0 flex-row gap-3">
-            {!isRegister && !inRestaurantPage ? (
+            {!isRegistered && inHomePage ? (
               SignInAndLogin
             ) : (
               <>
-                {inRestaurantPage ? (
-                  buttonsInRestaurantPage
+                {!inHomePage ? (
+                  buttonPages
                 ) : (
                   // if user is registered and not in restaurant page
                   <>
