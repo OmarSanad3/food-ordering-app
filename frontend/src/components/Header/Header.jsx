@@ -7,13 +7,13 @@ function Header() {
   const { isRegistered, inHomePage } = useContext(AppContext);
   const SignInAndLogin = (
     <>
-      <li>
+      <li className = "nav-item">
         {/* add sign up page here  */}
         <Link className="nav-link" to="/">
           Login
         </Link>
       </li>
-      <li>
+      <li className = "nav-item">
         <Link className="nav-link active" to="/">
           Sign Up
         </Link>
@@ -24,7 +24,7 @@ function Header() {
   const buttonPages = (
     <>
       {isRegistered ? (
-        <li>
+        <li className = "nav-item">
           <Link className="nav-link" to="/">
             Notification
           </Link>
@@ -32,7 +32,7 @@ function Header() {
       ) : null}
 
       {isRegistered ? (
-        <li>
+        <li className = "nav-item">
           <Link className="nav-link" to="/">
             My orders
           </Link>
@@ -42,7 +42,7 @@ function Header() {
         <input
           className="form-control me-2"
           type="search"
-          placeholder="Search"
+          placeholder="Find a Restaurant"
           aria-label="Search"
         />
         <button className="btn btn-outline-warning" type="submit">
@@ -57,23 +57,23 @@ function Header() {
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
-          Change city
+          Change City
         </Link>
         <ul className="dropdown-menu">
-          <li>
+          <li className = "nav-item">
             <Link className="dropdown-item" to="#">
               Action
             </Link>
           </li>
-          <li>
+          <li className = "nav-item">
             <Link className="dropdown-item" to="#">
               Another action
             </Link>
           </li>
-          <li>
+          <li className = "nav-item">
             <hr className="dropdown-divider" />
           </li>
-          <li>
+          <li className = "nav-item">
             <Link className="dropdown-item" to="#">
               Something else here
             </Link>
@@ -81,7 +81,7 @@ function Header() {
         </ul>
       </li>
       {isRegistered ? (
-        <li>
+        <li className = "nav-item">
           <Link className="nav-link" to="/">
             Profile
           </Link>
@@ -91,9 +91,7 @@ function Header() {
       )}
     </>
   );
-  // const buttonPagesWithoutReg
-  console.log(isRegistered);
-  
+
   return (
     <nav
       className={`navbar navbar-expand-lg bg-body-tertiary ${
@@ -111,9 +109,19 @@ function Header() {
             />
           </div>
         </Link>
-
-        <div>
-          <ul className="navbar-nav ms-auto mb-2 mb-lg-0 flex-row gap-3">
+        <button
+          className="navbar-toggler shadow-none border-0"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav ms-auto mb-2 mb-lg-0 gap-3">
             {!isRegistered && inHomePage ? (
               SignInAndLogin
             ) : (
@@ -123,7 +131,7 @@ function Header() {
                 ) : (
                   // if user is registered and not in restaurant page
                   <>
-                    <li>
+                    <li className = "nav-item">
                       <Link className="nav-link" to="/">
                         Profile
                       </Link>

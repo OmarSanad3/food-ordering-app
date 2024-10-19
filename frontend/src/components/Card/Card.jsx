@@ -1,5 +1,5 @@
 import styles from "./Card.module.css"; // Importing the CSS module
-import img from "../../assets/dish1.jpg";
+import img from "../../assets/dish1.webp";
 function Card() {
   return (
     <div className={styles.cardContainer}>

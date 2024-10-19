@@ -3,7 +3,7 @@ import { createContext, useState } from "react";
 export const AppContext = createContext();
 
 export function AppProvider({ children }) {
-  const [isRegistered, setIsRegistered] = useState(true);
+  const [isRegistered, setIsRegistered] = useState(false);
   const [inHomePage, setInHomePage] = useState(true);
 
   function toggleRegistration() {
