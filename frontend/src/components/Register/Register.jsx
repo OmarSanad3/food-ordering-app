@@ -43,7 +43,7 @@ const userData = {
 async function sendUserData(values) {
   setIsLoading(true)
   try {
-    const res = await axios.post("https://ecommerce.routemisr.com/api/v1/auth/signup", values);
+    await axios.post("https://ecommerce.routemisr.com/api/v1/auth/signup", values);
     console.log("submitted", values);
  
     setisPost(true); 
