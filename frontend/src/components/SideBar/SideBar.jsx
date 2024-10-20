@@ -1,87 +1,105 @@
-import styles from "./SideBar.module.css"
+import styles from "./SideBar.module.css";
 export default function SideBar() {
   return (
     <div
-      className={`d-none d-lg-flex flex-column flex-shrink-0 p-3 text ${styles.SideBar} ` }
-      
+      className={`d-none d-lg-flex flex-column flex-shrink-0 p-3 text ${styles.SideBar} `}
     >
       <a
         href="/"
         className="d-flex align-items-center mb-3 mb-md-0 me-md-auto  text-decoration-none "
       >
-        <span className="fs-4">Sidebar</span>
+        <span className="fs-5 text-black-50">Show results for:</span>
       </a>
       <hr />
       <ul className="nav nav-pills flex-column mb-auto">
-        <li className="nav-item">
-          <a href="#" className={`nav-link ${styles.active}`} aria-current="page">
-            Home
-          </a>
-        </li>
-        <li>
-          <a href="#" className="nav-link ">
-            Dashboard
-          </a>
-        </li>
-        <li>
-          <a href="#" className="nav-link ">
-            Orders
-          </a>
-        </li>
-        <li>
-          <a href="#" className="nav-link ">
-            Products
-          </a>
-        </li>
-        <li>
-          <a href="#" className="nav-link ">
-            Customers
-          </a>
-        </li>
-      </ul>
-      <hr />
-      <div className="dropdown">
-        <a
-          href="#"
-          className="d-flex align-items-center  text-decoration-none dropdown-toggle"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          <img
-            src="https://github.com/mdo.png"
-            alt=""
-            width="32"
-            height="32"
-            className="rounded-circle me-2"
+        <p className="fw-bold ">Sorted By:</p>
+
+        <div className="form-check">
+          <input
+            className={`form-check-input ${styles.formCheckInput}`}
+            type="radio"
+            name="Sorted"
+            id="Popular"
           />
-          <strong>mdo</strong>
-        </a>
-        <ul className="dropdown-menu dropdown-menu-dark text-small shadow">
-          <li>
-            <a className="dropdown-item" href="#">
-              New project...
-            </a>
-          </li>
-          <li>
-            <a className="dropdown-item" href="#">
-              Settings
-            </a>
-          </li>
-          <li>
-            <a className="dropdown-item" href="#">
-              Profile
-            </a>
-          </li>
-          <li>
-            <hr className="dropdown-divider" />
-          </li>
-          <li>
-            <a className="dropdown-item" href="#">
-              Sign out
-            </a>
-          </li>
-        </ul>
-      </div>
+          <label className="form-check-label text-black-50" htmlFor="Popular">
+            Popular
+          </label>
+        </div>
+        <div className="form-check">
+          <input
+            className={`form-check-input ${styles.formCheckInput}`}
+            type="radio"
+            name="Sorted"
+            id="Rating"
+          />
+          <label className="form-check-label text-black-50" htmlFor="Rating">
+            Rating
+          </label>
+        </div>
+        <div className="form-check">
+          <input
+            className={`form-check-input ${styles.formCheckInput}`}
+            type="radio"
+            name="Sorted"
+            id="Delivery"
+          />
+          <label className="form-check-label text-black-50" htmlFor="Delivery">
+            Delivery Time
+          </label>
+        </div>
+      </ul>
+      <button className = "btn btn-warning mt-3 p-1" >Apply</button>
+      <hr />
+      <ul className="nav nav-pills flex-column mb-auto">
+        <p className="fw-bold ">Dishes:</p>
+
+        <div className="form-check">
+          <input
+            className={`form-check-input ${styles.formCheckInput}`}
+            type="radio"
+            name="Dishes"
+            id="Pizza"
+          />
+          <label className="form-check-label text-black-50" htmlFor="Pizza">
+            Pizza
+          </label>
+        </div>
+        <div className="form-check">
+          <input
+            className={`form-check-input ${styles.formCheckInput}`}
+            type="radio"
+            name="Dishes"
+            id="Burger"
+          />
+          <label className="form-check-label text-black-50" htmlFor="Burger">
+            Burger
+          </label>
+        </div>
+        <div className="form-check">
+          <input
+            className={`form-check-input ${styles.formCheckInput}`}
+            type="radio"
+            name="Dishes"
+            id="Shawerma"
+          />
+          <label className="form-check-label text-black-50" htmlFor="Shawerma">
+            Shawerma
+          </label>
+        </div>
+        <div className="form-check">
+          <input
+            className={`form-check-input ${styles.formCheckInput}`}
+            type="radio"
+            name="Dishes"
+            id="Koshary"
+          />
+          <label className="form-check-label text-black-50" htmlFor="Koshary">
+            Koshary
+          </label>
+        </div>
+      </ul>
+    
+      <button className = "btn btn-warning mt-3 p-1" >Apply</button>
     </div>
   );
 }

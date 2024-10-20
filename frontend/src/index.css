@@ -6,3 +6,6 @@
 :root {
     --main-color: #ffb901;
 }
+a {
+    text-decoration: none;
+}

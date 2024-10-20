@@ -4,10 +4,10 @@ import { AppContext } from "../../context/AppContext";
 import styles from "./Header.module.css";
 import logo from "../../images/Screenshot_2024-10-17_183239-removebg-preview.png";
 function Header() {
-  const { isRegister, inRestaurantPage } = useContext(AppContext);
+  const { isRegistered, inHomePage } = useContext(AppContext);
   const SignInAndLogin = (
     <>
-      <li>
+      <li className = "nav-item">
         {/* add sign up page here  */}
         <Link className="nav-link" to="/Login">
           Login
@@ -21,18 +21,18 @@ function Header() {
     </>
   );
 
-  const buttonsInRestaurantPage = (
+  const buttonPages = (
     <>
-      {isRegister ? (
-        <li>
+      {isRegistered ? (
+        <li className = "nav-item">
           <Link className="nav-link" to="/">
             Notification
           </Link>
         </li>
       ) : null}
 
-      {isRegister ? (
-        <li>
+      {isRegistered ? (
+        <li className = "nav-item">
           <Link className="nav-link" to="/">
             My orders
           </Link>
@@ -42,7 +42,7 @@ function Header() {
         <input
           className="form-control me-2"
           type="search"
-          placeholder="Search"
+          placeholder="Find a Restaurant"
           aria-label="Search"
         />
         <button className="btn btn-outline-warning" type="submit">
@@ -57,31 +57,31 @@ function Header() {
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
-          Change city
+          Change City
         </Link>
         <ul className="dropdown-menu">
-          <li>
+          <li className = "nav-item">
             <Link className="dropdown-item" to="#">
               Action
             </Link>
           </li>
-          <li>
+          <li className = "nav-item">
             <Link className="dropdown-item" to="#">
               Another action
             </Link>
           </li>
-          <li>
+          <li className = "nav-item">
             <hr className="dropdown-divider" />
           </li>
-          <li>
+          <li className = "nav-item">
             <Link className="dropdown-item" to="#">
               Something else here
             </Link>
           </li>
         </ul>
       </li>
-      {isRegister ? (
-        <li>
+      {isRegistered ? (
+        <li className = "nav-item">
           <Link className="nav-link" to="/">
             Profile
           </Link>
@@ -91,36 +91,47 @@ function Header() {
       )}
     </>
   );
-  // const buttonsInRestaurantPageWithoutReg
 
   return (
     <nav
       className={`navbar navbar-expand-lg bg-body-tertiary ${
-        !inRestaurantPage ? styles.transparentNavbar : null
-      }  ${!inRestaurantPage ? "navbar-dark" : null}`}
-      style={{ backgroundColor: "transparent !important" }} 
+        inHomePage ? styles.transparentNavbar : null
+      }  ${inHomePage ? "navbar-dark" : null}`}
+      style={{ backgroundColor: "transparent !important" }}
     >
       <div className="container">
         <Link className="navbar-brand" to="/">
           <div className={`${styles.logo} d-flex align-item-center `}>
-            <img src={logo} alt="Logo" className="d-inline-block align-text-top"/>
-          
+            <img
+              src={logo}
+              alt="Logo"
+              className="d-inline-block align-text-top"
+            />
           </div>
-
         </Link>
-
-        <div>
-          <ul className="navbar-nav ms-auto mb-2 mb-lg-0 flex-row gap-3">
-            {!isRegister && !inRestaurantPage ? (
+        <button
+          className="navbar-toggler shadow-none border-0"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav ms-auto mb-2 mb-lg-0 gap-3">
+            {!isRegistered && inHomePage ? (
               SignInAndLogin
             ) : (
               <>
-                {inRestaurantPage ? (
-                  buttonsInRestaurantPage
+                {!inHomePage ? (
+                  buttonPages
                 ) : (
                   // if user is registered and not in restaurant page
                   <>
-                    <li>
+                    <li className = "nav-item">
                       <Link className="nav-link" to="/">
                         Profile
                       </Link>
