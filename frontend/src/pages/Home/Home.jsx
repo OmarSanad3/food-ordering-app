@@ -1,6 +1,6 @@
 import classes from "./Home.module.css";
 import { Link } from "react-router-dom";
-import img from "../../assets/dish1.jpg";
+import img from "../../assets/dish1.webp";
 export default function Home() {
   return (
     <div className="container">
@@ -10,7 +10,7 @@ export default function Home() {
           <img src={img} alt="dish" />
         </div>
         <div className={`${classes.maxWidth} text-center text-light`}>
-          <h1 className={`fw-bold mt-5 pt-5 ${classes.sectionTitle}`}>
+          <h1 className={`fw-bold mt-md-5 pt-5 ${classes.sectionTitle}`}>
             Discover & Order the food you love.
           </h1>
         </div>

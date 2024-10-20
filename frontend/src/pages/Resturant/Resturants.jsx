@@ -38,6 +38,7 @@ function RestaurantPage() {
             <Card />
           </div>
         </div>
+        <button className="btn btn-warning mt-5 w-100">Load More</button>
       </div>
     </div>
   );
