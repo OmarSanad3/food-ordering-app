@@ -3,7 +3,7 @@
 export default function Cart() {
   return <>
     
-    <div className="col-md-4">
+    <div className="col-md-12">
       <div className="card mb-4">
         <div className="card-header py-3 bg-warning ">
           <h5 className="mb-0 text-white">Your Cart</h5>

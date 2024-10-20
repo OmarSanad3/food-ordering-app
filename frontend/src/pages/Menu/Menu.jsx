@@ -61,11 +61,11 @@ export default function Menu() {
        <div className={`row ${styles.row3} pt-md-3`} >
 
 
-<div className="col-2">
+<div className="col-3">
 
 <SideBar/>
 </div>
-<div className="col-6">
+<div className="col-3">
 <Cart/>
 </div>        
 
