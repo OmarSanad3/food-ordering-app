@@ -9,11 +9,14 @@ import { AppContext } from "../../context/AppContext";
 import * as yup from "yup";
 
 export default function Login() {
-  const [isPost, setisPost] = useState(false);
-  const [errMessage, seterrMessage] = useState(undefined);
-  const [isLoading, setIsLoading] = useState(false);
-  const { toggleRegistration } = useContext(AppContext);
-  const navigate = useNavigate();
+  const [isPost, setisPost] = useState(false)
+  const [errMessage, seterrMessage] = useState(undefined)
+  const [isLoading, setIsLoading] = useState(false)
+  const { toggleRegistration} = useContext(AppContext);
+
+  const navigate=useNavigate()
+  
+  
 
   const mySchema = yup.object({
     email: yup

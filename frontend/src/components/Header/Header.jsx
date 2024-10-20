@@ -4,7 +4,7 @@ import { AppContext } from "../../context/AppContext";
 import styles from "./Header.module.css";
 import logo from "../../images/Screenshot_2024-10-17_183239-removebg-preview.png";
 function Header() {
-  const { isRegistered, inHomePage } = useContext(AppContext);
+  const { isRegistered, inHomePage , toggleRegistration } = useContext(AppContext);
   const SignInAndLogin = (
     <>
       <li className = "nav-item">
@@ -81,11 +81,18 @@ function Header() {
         </ul>
       </li>
       {isRegistered ? (
+        <>
         <li className = "nav-item">
           <Link className="nav-link" to="/">
             Profile
           </Link>
         </li>
+        <li className = "nav-item">
+          <Link className="nav-link" to="/" onClick={toggleRegistration} >
+            Logout
+          </Link>
+         </li>
+        </>
       ) : (
         SignInAndLogin
       )}
