@@ -9,12 +9,12 @@ function Header() {
     <>
       <li className = "nav-item">
         {/* add sign up page here  */}
-        <Link className="nav-link" to="/">
+        <Link className="nav-link" to="/Login">
           Login
         </Link>
       </li>
-      <li className = "nav-item">
-        <Link className="nav-link active" to="/">
+      <li>
+        <Link className="nav-link active" to="/Register">
           Sign Up
         </Link>
       </li>
