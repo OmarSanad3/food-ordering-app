@@ -3,6 +3,8 @@ import RootLayout from "./../components/Root";
 import Home from "../pages/Home/Home";
 import Resturant from "../pages/Resturant/Resturants";
 import Menu from "../pages/Menu/Menu";
+import Register from "../components/Register/Register";
+import Login from "../components/Login/Login";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -17,6 +19,12 @@ const router = createBrowserRouter([
         path: "/resturants/menu",
         element: <Menu />,
       },
+      {
+        path:"/Register",element:<Register/>
+      },
+      {
+        path:"/Login",element:<Login/>
+      }
     ],
   },
 ]);

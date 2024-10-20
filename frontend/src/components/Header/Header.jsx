@@ -9,12 +9,12 @@ function Header() {
     <>
       <li>
         {/* add sign up page here  */}
-        <Link className="nav-link" to="/">
+        <Link className="nav-link" to="/Login">
           Login
         </Link>
       </li>
       <li>
-        <Link className="nav-link active" to="/">
+        <Link className="nav-link active" to="/Register">
           Sign Up
         </Link>
       </li>
@@ -98,7 +98,7 @@ function Header() {
       className={`navbar navbar-expand-lg bg-body-tertiary ${
         !inRestaurantPage ? styles.transparentNavbar : null
       }  ${!inRestaurantPage ? "navbar-dark" : null}`}
-      style={{ backgroundColor: "transparent !important" }}
+      style={{ backgroundColor: "transparent !important" }} 
     >
       <div className="container">
         <Link className="navbar-brand" to="/">
