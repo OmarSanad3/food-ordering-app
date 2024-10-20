@@ -3,6 +3,9 @@ import { useFormik} from "formik";
 import { useState } from "react";
 import { ColorRing } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AppContext } from "../../context/AppContext";
+
 
 import * as yup from 'yup'
 
@@ -11,6 +14,8 @@ export default function Login() {
   const [isPost, setisPost] = useState(false)
   const [errMessage, seterrMessage] = useState(undefined)
   const [isLoading, setIsLoading] = useState(false)
+  const { toggleRegistration} = useContext(AppContext);
+
   const navigate=useNavigate()
   
   
@@ -32,11 +37,12 @@ const userData = {
 async function sendUserData(values) {
   setIsLoading(true)
   try {
-    const res = await axios.post("https://ecommerce.routemisr.com/api/v1/auth/signin", values);
+    await axios.post("https://ecommerce.routemisr.com/api/v1/auth/signin", values);
     console.log("submitted", values);
- 
+  
     setisPost(true); 
     seterrMessage(undefined)
+    toggleRegistration()
     setTimeout(function(){navigate("/resturants")},2000);
   } catch (e) {
     if (e.response && e.response.status === 409) {
