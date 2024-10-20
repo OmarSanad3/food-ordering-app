@@ -3,8 +3,8 @@ import RootLayout from "./../components/Root";
 import Home from "../pages/Home/Home";
 import Resturant from "../pages/Resturant/Resturants";
 import Menu from "../pages/Menu/Menu";
-import Register from "../components/Register/Register";
-import Login from "../components/Login/Login";
+import Register from "../pages/Register/Register";
+import Login from "../pages/Login/Login";
 const router = createBrowserRouter([
   {
     path: "/",
