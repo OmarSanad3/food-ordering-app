@@ -1,0 +1,32 @@
+.SideBar {
+  background-color: #fff;
+  border-radius: 12px;
+  border: 1px solid var(--main-color);
+}
+
+.SideBar a {
+  color: black !important;
+}
+
+.SideBar a:hover {
+  background-color: var(--main-color);
+}
+
+.active {
+  background-color: var(--main-color) !important;
+  color: var(--main-color);
+}
+/* Custom radio button styles */
+.formCheckInput:checked {
+    background-color: var(--main-color);
+    border-color: var(--main-color) !important;
+}
+.formCheckInput:checked + label {
+    color: black !important;
+    font-weight: 400;
+}
+.formCheckInput:focus {
+    border-color: var(--main-color) !important;
+    outline: 0;
+    box-shadow: 0 0 0 .25rem rgba(233, 219, 60, 0.25);
+}

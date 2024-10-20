@@ -1,0 +1,87 @@
+.cardContainer {
+  min-width: 300px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
+
+.imageSection {
+  position: relative;
+}
+
+.foodImage {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.priceTag {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.detailsSection {
+  padding: 15px;
+}
+
+.restaurantName {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+  color: #333;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+.stars {
+  color: #ffc107;
+}
+
+.ratingNumber {
+  margin-left: 5px;
+  color: #666;
+}
+
+.description {
+  color: #666;
+  font-size: 14px;
+}
+
+.offers {
+  background-color: #e6f9e6;
+  color: #27a745;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.deliveryInfo {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.deliveryTime {
+  font-size: 14px;
+  color: #333;
+}
+
+.orderOnline {
+  font-size: 14px;
+  color: #27a745;
+  font-weight: bold;
+  cursor: pointer;
+}
