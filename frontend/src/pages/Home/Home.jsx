@@ -32,10 +32,10 @@ export default function Home() {
                 className="form-select"
                 aria-label="Default select example"
               >
-                <option selected>City</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                <option value="2">Cairo</option>
+                <option value="1">Portsaid</option>
+                <option value="3">Alexandria</option>
+                <option value="3">Elmansura</option>
               </select>
             </div>
             <div className="col-md-2 col-lg-1 col-sm-2">
