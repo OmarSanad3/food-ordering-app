@@ -2,8 +2,15 @@ import styles from "./Menu.module.css";
 // import logo from "../../images/kfc-logo-editorial-free-vector.jpg";
 import Cart from "../../components/cart/Cart";
 import Order from "../../components/Order/Order"
-import SideBar from "../../components/SideBar/SideBar";
+
+import { useState } from "react";
+import Reviews from "../../components/Reviews/Reviews";
+import Info from "../../components/Info/Info";
 export default function Menu() {
+  const [selectedTab, setSelectedTab] = useState("menu");
+  
+  
+  
   return (
     <>
       <div className={`${styles.header} `}>
@@ -12,7 +19,6 @@ export default function Menu() {
             <div className="col-sm-8 me-auto">
               <div className="row">
                 <div className="col-sm-2">
-                  {" "}
                   <img
                     className="img-fluid"
                     src="https://images.deliveryhero.io/image/talabat/restaurants/New_Project_-_2020-1_637382995109103333.jpg?width=180"
@@ -51,19 +57,34 @@ export default function Menu() {
               <li className="col-4 ">
                 <div className="d-flex align-items-center justify-content-center">
                   <i className="bi bi-book fs-5 bg-warning"></i>
-                  <span className={`fs-5 ms-2 ${styles.active}`}>Menu</span>
+                  <button
+                    className={`btn fs-5 ms-2 ${styles.active}`}
+                    onClick={() => setSelectedTab("menu")}
+                  >
+                    Menu
+                  </button>
                 </div>
               </li>
               <li className="col-4  ">
                 <div className="d-flex align-items-center justify-content-center">
                   <i className="bi bi-chat-dots fs-5 bg-warning"></i>
-                  <span className="fs-5 ms-2 text-center">Reviews</span>
+                  <button
+                    className=" btn fs-5 ms-2 text-center"
+                    onClick={() => setSelectedTab("reviews")}
+                  >
+                    Reviews
+                  </button>
                 </div>
               </li>
               <li className="col-4 ">
                 <div className="d-flex align-items-center justify-content-center ">
                   <i className="bi bi-info-circle-fill fs-5 bg-warning"></i>
-                  <span className="fs-5 ms-2">info</span>
+                  <button
+                    className="btn fw-normal fs-5 ms-2"
+                    onClick={() => setSelectedTab("info")}
+                  >
+                    info
+                  </button>
                 </div>
               </li>
             </ul>
@@ -73,14 +94,23 @@ export default function Menu() {
       <div className="content">
         <div className="container">
           <div className={`row ${styles.row3} pt-md-3`}>
-            <div className="col-3 d-sm-none d-lg-block ">
+            {/* <div className="col-3 d-sm-none d-lg-block">
               <SideBar />
-            </div>
-            <div className=" col-md-12 col-lg-6">
-              <input type="search" placeholder="Search in menu" className={`${styles.search} w-100 mb-3`} />
-              <Order/>
-            </div>
-            <div className="col-md-12 col-lg-3 mt-md-5 mt-lg-0 ">
+            </div> */}
+
+            {selectedTab === "menu" ? (
+              <div className="col-md-12 col-lg-9">
+                <Order />
+                <Order />
+                <Order />
+                <Order />
+              </div>
+            ) : selectedTab === "reviews" ? (
+            <Reviews />
+            ) : (
+              <Info />
+            )}
+            <div className="col-md-12 mt-md-5 mt-lg-2 col-lg-3">
               <Cart />
             </div>
           </div>

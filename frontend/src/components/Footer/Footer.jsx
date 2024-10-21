@@ -1,6 +1,6 @@
 
 import styles from "./Footer.module.css";
-import mylogo from "../../images/Screenshot_2024-10-17_183239-removebg-preview.png";
+import mylogo from "../../images/Screenshot_2024-10-17_183239-removebg-preview.webp";
 
 export default function Footer() {
   return (

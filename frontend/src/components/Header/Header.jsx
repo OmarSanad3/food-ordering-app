@@ -2,12 +2,13 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
 import styles from "./Header.module.css";
-import logo from "../../images/Screenshot_2024-10-17_183239-removebg-preview.png";
+import logo from "../../images/Screenshot_2024-10-17_183239-removebg-preview.webp";
 function Header() {
-  const { isRegistered, inHomePage , toggleRegistration } = useContext(AppContext);
+  const { isRegistered, inHomePage, toggleRegistration, setSearch } =
+    useContext(AppContext);
   const SignInAndLogin = (
     <>
-      <li className = "nav-item">
+      <li className="nav-item">
         {/* add sign up page here  */}
         <Link className="nav-link" to="/Login">
           Login
@@ -24,7 +25,7 @@ function Header() {
   const buttonPages = (
     <>
       {isRegistered ? (
-        <li className = "nav-item">
+        <li className="nav-item">
           <Link className="nav-link" to="/">
             Notification
           </Link>
@@ -32,7 +33,7 @@ function Header() {
       ) : null}
 
       {isRegistered ? (
-        <li className = "nav-item">
+        <li className="nav-item">
           <Link className="nav-link" to="/">
             My orders
           </Link>
@@ -40,14 +41,15 @@ function Header() {
       ) : null}
       <form className="d-flex" role="search">
         <input
-          className="form-control me-2"
+          className={`form-control me-2 ${styles.searchInput}`}
           type="search"
           placeholder="Find a Restaurant"
           aria-label="Search"
+          onChange={(e) => setSearch(e.target.value)}
         />
-        <button className="btn btn-outline-warning" type="submit">
+        {/* <button className="btn btn-outline-warning" type="submit">
           Search
-        </button>
+        </button> */}
       </form>
       <li className="nav-item dropdown">
         <Link
@@ -60,38 +62,42 @@ function Header() {
           Change City
         </Link>
         <ul className="dropdown-menu">
-          <li className = "nav-item">
+          <li className="nav-item">
             <Link className="dropdown-item" to="#">
-              Action
+              Portsaid
             </Link>
           </li>
-          <li className = "nav-item">
+          <li className="nav-item">
             <Link className="dropdown-item" to="#">
-              Another action
+              Cairo
             </Link>
           </li>
-          <li className = "nav-item">
-            <hr className="dropdown-divider" />
+          <li className="nav-item">
           </li>
-          <li className = "nav-item">
+          <li className="nav-item">
             <Link className="dropdown-item" to="#">
-              Something else here
+              Alexandria
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="dropdown-item" to="#">
+              Elmansoura
             </Link>
           </li>
         </ul>
       </li>
       {isRegistered ? (
         <>
-        <li className = "nav-item">
-          <Link className="nav-link" to="/">
-            Profile
-          </Link>
-        </li>
-        <li className = "nav-item">
-          <Link className="nav-link" to="/" onClick={toggleRegistration} >
-            Logout
-          </Link>
-         </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/">
+              Profile
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/" onClick={toggleRegistration}>
+              Logout
+            </Link>
+          </li>
         </>
       ) : (
         SignInAndLogin
@@ -138,7 +144,7 @@ function Header() {
                 ) : (
                   // if user is registered and not in restaurant page
                   <>
-                    <li className = "nav-item">
+                    <li className="nav-item">
                       <Link className="nav-link" to="/">
                         Profile
                       </Link>
