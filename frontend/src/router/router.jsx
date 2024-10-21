@@ -5,15 +5,19 @@ import Resturant from "../pages/Resturant/Resturants";
 import Menu from "../pages/Menu/Menu";
 import Register from "../pages/Register/Register";
 import Login from "../pages/Login/Login";
+import Error from "../pages/Error/Error";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
+    errorElement: <Error />,
     children: [
       { index: true, element: <Home /> },
       {
         path: "/resturants",
         element: <Resturant />,
+        errorElement: <Error />,
+
       },
       {
         path: "/resturants/menu",
