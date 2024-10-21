@@ -1,5 +1,10 @@
 .header {
     border-bottom: 1px solid rgb(201, 199, 199);
+    background-color: #ffffffa9;
+}
+
+.header img {
+    border-radius: 10px;
 }
 
 .row2 ul li div span {
@@ -36,4 +41,12 @@
 
 .row3 {
     padding-top: 30px;
+}
+
+.row3 .search {
+    padding: 8px 6px;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    border: 1px solid var(--main-color);
 }
