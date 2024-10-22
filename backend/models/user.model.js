@@ -7,7 +7,6 @@ const userSchema = new Schema({
   lastName: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
-  phoneNumber: { type: String, required: true },
   cart: [
     {
       meal: { type: Schema.Types.ObjectId, ref: "Meal", required: true },
@@ -17,6 +16,8 @@ const userSchema = new Schema({
   orders: [{ type: Schema.Types.ObjectId, ref: "Order", required: true }],
 });
 
-const User = mongoose.model("User", userSchema);
+userSchema.methods.addToCart = async function (mealId) {};
+
+module.exports = mongoose.model("User", userSchema);
 
 // * ==================== Methods ==================== * //

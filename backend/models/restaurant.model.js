@@ -23,13 +23,21 @@ const restaurantSchema = new Schema({
   },
 });
 
-const Restaurant = mongoose.model("Restaurant", restaurantSchema);
-
 // * ==================== Methods ==================== * //
 
-restaurantSchema.methods.getRating = async () => {
-  // rating: {
-  //   count: { type: Number, required: true },
-  //   starts: { type: Number, required: true },
-  // },
+restaurantSchema.methods.getRating = async function () {
+  return {
+    count: 10,
+    stars: 4.5,
+  };
 };
+
+restaurantSchema.methods.updateTags = async function (tags) {
+  this.tags = tags;
+  return await this.save();
+};
+
+
+// * ==================== exports ==================== * //
+
+module.exports = mongoose.model("Restaurant", restaurantSchema);
