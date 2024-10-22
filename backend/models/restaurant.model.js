@@ -4,10 +4,6 @@ const Schema = mongoose.Schema;
 
 const restaurantSchema = new Schema({
   name: { type: String, required: true },
-  rating: {
-    count: { type: Number, required: true },
-    starts: { type: Number, required: true },
-  },
   logo: { type: String, required: true },
   location: { type: String, required: true }, // Cairo, Port Said, etc.
   smallDescription: { type: String, required: true },
@@ -31,4 +27,9 @@ const Restaurant = mongoose.model("Restaurant", restaurantSchema);
 
 // * ==================== Methods ==================== * //
 
-this.getRestaurants = async () => {};
+restaurantSchema.methods.getRating = async () => {
+  // rating: {
+  //   count: { type: Number, required: true },
+  //   starts: { type: Number, required: true },
+  // },
+};
