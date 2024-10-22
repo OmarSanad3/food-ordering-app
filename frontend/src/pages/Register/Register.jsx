@@ -12,10 +12,10 @@ export default function Register() {
   const [isPost, setisPost] = useState(false);
   const [errMessage, seterrMessage] = useState(undefined);
   const [isLoading, setIsLoading] = useState(false);
-  const { toggleRegistration } = useContext(AppContext);
+  const {setToken}=useContext(AppContext)
 
   const navigate = useNavigate();
-  console.log(isPost, "before");
+
 
   const mySchema = yup.object({
     name: yup
@@ -47,23 +47,19 @@ export default function Register() {
   async function sendUserData(values) {
     setIsLoading(true);
     try {
-      await axios.post(
+      const res=await axios.post(
         "https://ecommerce.routemisr.com/api/v1/auth/signup",
         values
       );
-      console.log("submitted", values);
-
+      localStorage.setItem("tkn",res.data.token)
+      setToken(res.data.token)
       setisPost(true);
-      toggleRegistration();
-      console.log();
-
       seterrMessage(undefined);
       setTimeout(function () {
         navigate("/resturants");
-      }, 2000);
+      }, 1000);
     } catch (e) {
       if (e.response && e.response.status === 409) {
-        console.log(e.response.data.message);
         seterrMessage(e.response.data.message); // Conflict: User already exists
         setisPost(false);
       } else {
@@ -80,7 +76,7 @@ export default function Register() {
     validationSchema: mySchema,
   });
 
-  console.log(myFormik.errors);
+
 
   return (
     <div className="w-75 m-auto p-5">

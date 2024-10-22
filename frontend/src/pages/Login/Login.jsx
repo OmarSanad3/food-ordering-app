@@ -12,7 +12,7 @@ export default function Login() {
   const [isPost, setisPost] = useState(false);
   const [errMessage, seterrMessage] = useState(undefined);
   const [isLoading, setIsLoading] = useState(false);
-  const { toggleRegistration } = useContext(AppContext);
+  const {setToken}=useContext(AppContext)
 
   const navigate = useNavigate();
 
@@ -31,18 +31,19 @@ export default function Login() {
   async function sendUserData(values) {
     setIsLoading(true);
     try {
-      await axios.post(
+     const res= await axios.post(
         "https://ecommerce.routemisr.com/api/v1/auth/signin",
         values
       );
-      console.log("submitted", values);
+      
 
       setisPost(true);
+      setToken(res.data.token)
+      localStorage.setItem("tkn",res.data.token)
       seterrMessage(undefined);
-      toggleRegistration();
       setTimeout(function () {
         navigate("/resturants");
-      }, 2000);
+      }, 1000);
     } catch (e) {
       if (e.response && e.response.status === 409) {
         console.log(e.response.data.message);
@@ -62,8 +63,7 @@ export default function Login() {
 
     validationSchema: mySchema,
   });
-
-  console.log(myFormik.errors);
+  
 
   return (
     <div className="w-75 m-auto p-5">
