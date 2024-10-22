@@ -9,7 +9,6 @@ function Header() {
   const SignInAndLogin = (
     <>
       <li className="nav-item">
-        {/* add sign up page here  */}
         <Link className="nav-link" to="/Login">
           Login
         </Link>
