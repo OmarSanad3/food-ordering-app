@@ -10,6 +10,11 @@
   text-align: center;
 }
 
+.continer .P p {
+  font-size: 5rem !important;
+  font-weight: bold;
+}
+
 .errorMessage {
   font-size: 2rem;
   font-weight: bold;

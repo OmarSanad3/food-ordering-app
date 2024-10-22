@@ -35,7 +35,6 @@ function Card({ title, stars, reviews, offer, deliveryTime, location }) {
                 }
               })}
             </span>
-            {/* 4.5 star rating */}
             <span className={styles.ratingNumber}> ({reviews}) </span>
           </div>
         </div>
