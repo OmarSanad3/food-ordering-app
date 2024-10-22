@@ -1,11 +1,22 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
 import styles from "./Header.module.css";
 import logo from "../../images/Screenshot_2024-10-17_183239-removebg-preview.webp";
+
 function Header() {
-  const { isRegistered, inHomePage, toggleRegistration, setSearch } =
+  
+  const { mytoken,setToken, inHomePage, setSearch} =
     useContext(AppContext);
+ 
+    const navigate=useNavigate()
+    function logOut(){
+      setToken(null)
+      localStorage.removeItem("tkn")
+      navigate("/login")
+
+  }
+    
   const SignInAndLogin = (
     <>
       <li className="nav-item">
@@ -23,7 +34,7 @@ function Header() {
 
   const buttonPages = (
     <>
-      {isRegistered ? (
+      {mytoken ? (
         <li className="nav-item">
           <Link className="nav-link" to="/">
             Notification
@@ -31,7 +42,7 @@ function Header() {
         </li>
       ) : null}
 
-      {isRegistered ? (
+      {mytoken ? (
         <li className="nav-item">
           <Link className="nav-link" to="/">
             My orders
@@ -85,7 +96,7 @@ function Header() {
           </li>
         </ul>
       </li>
-      {isRegistered ? (
+      {mytoken ? (
         <>
           <li className="nav-item">
             <Link className="nav-link" to="/">
@@ -93,7 +104,7 @@ function Header() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/" onClick={toggleRegistration}>
+            <Link className="nav-link" to="/"role="button" onClick={logOut}>
               Logout
             </Link>
           </li>
@@ -134,7 +145,7 @@ function Header() {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0 gap-3">
-            {!isRegistered && inHomePage ? (
+            {!mytoken && inHomePage ? (
               SignInAndLogin
             ) : (
               <>

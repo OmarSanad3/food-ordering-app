@@ -8,13 +8,13 @@ import Info from "../../components/Info/Info";
 
 export default function Menu() {
   const [selectedTab, setSelectedTab] = useState("menu");
-
+  
   return (
     <>
-      <div className={`${styles.header} p-lg-4 pb-lg-0`}>
+      <div className={`${styles.header} `}>
         <div className="container">
-          <div className="row p-lg-4 p-3 mt-4 mb-4 align-items-center">
-            <div className="col-sm-8">
+          <div className="row  pt-3 pb-3 pe-0 ps-0 mt-4 mb-4 align-items-center">
+            <div className="col-sm-8 me-auto">
               <div className="row">
                 <div className="col-sm-2">
                   <img
@@ -24,7 +24,7 @@ export default function Menu() {
                     height={150}
                   />
                 </div>
-                <div className="col-sm-4">
+                <div className="col-sm-4 ">
                   <div className="title fs-2 mb-2">Crep Town</div>
                   <div className="adress text-black-50 mb-1">
                     in Tarh-elbahr
@@ -35,9 +35,9 @@ export default function Menu() {
                 </div>
               </div>
             </div>
-            <div className="col-sm-4">
-              <div className="status fs-6 mb-4 text-black-50">Very Good</div>
-              <ul className="list-unstyled d-flex gap-3 fs-3">
+            <div className="col-sm-4 ">
+              <div className="status fs-6 mb-4 text-black-50 text-end">Very Good</div>
+              <ul className="list-unstyled d-flex gap-3 fs-3 justify-content-end">
                 <li>
                   <i className="fa-brands fa-cc-visa "></i>
                 </li>
