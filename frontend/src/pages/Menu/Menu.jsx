@@ -1,17 +1,13 @@
 import styles from "./Menu.module.css";
 // import logo from "../../images/kfc-logo-editorial-free-vector.jpg";
 import Cart from "../../components/cart/Cart";
-import Order from "../../components/Order/Order"
-
+import Order from "../../components/Order/Order";
 import { useState } from "react";
 import Reviews from "../../components/Reviews/Reviews";
 import Info from "../../components/Info/Info";
+
 export default function Menu() {
   const [selectedTab, setSelectedTab] = useState("menu");
-  
-  // api portsaid   settown(portsaid)  
-  // api llmansora
-  //if town=portad axops(api portsaid)
   
   return (
     <>
@@ -93,25 +89,30 @@ export default function Menu() {
           </div>
         </div>
       </div>
+
       <div className="content">
         <div className="container">
           <div className={`row ${styles.row3} pt-md-3`}>
-            {/* <div className="col-3 d-sm-none d-lg-block">
-              <SideBar />
-            </div> */}
-
             {selectedTab === "menu" ? (
               <div className="col-md-12 col-lg-9">
                 <Order />
                 <Order />
                 <Order />
                 <Order />
+                <Order />
+                <Order />
+                <Order />
               </div>
             ) : selectedTab === "reviews" ? (
-            <Reviews />
+              <div className="col-md-12 col-lg-9">
+                <Reviews />
+                <Reviews />
+                <Reviews />
+              </div>
             ) : (
               <Info />
             )}
+
             <div className="col-md-12 mt-md-5 mt-lg-2 col-lg-3">
               <Cart />
             </div>

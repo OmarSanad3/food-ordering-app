@@ -101,6 +101,18 @@ function RestaurantPage() {
     setSelectedDish(dish);
   };
 
+  const filterCards = (cards, selectedDish, search) => {
+    return cards.filter((item) => {
+      return (
+        (selectedDish === "All" || item.category === selectedDish) &&
+        (search.toLowerCase() === "" ||
+          item.title.toLowerCase().includes(search.toLowerCase()))
+      );
+    });
+  };
+
+  const filteredCards = filterCards(sortedCards, selectedDish, search);
+
   return (
     <div className="row restaurant-page mt-5">
       <div className="col-2">
@@ -113,21 +125,14 @@ function RestaurantPage() {
 
       <div className="container text-center col-md-10 col-sm-12">
         <div className="row g-4 ">
-          {sortedCards
-            .filter((item) => {
-              return (
-                (selectedDish === "All" || item.category === selectedDish) &&
-                (search.toLowerCase() === "" ||
-                  item.title.toLowerCase().includes(search.toLowerCase()))
-              );
-            })
-            .map((card) => (
+          { filteredCards.length > 0 ? filteredCards.map((card) => (
               <div className="col" key={card.id}>
                 <Link to="menu">
                   <Card {...card} />
                 </Link>
               </div>
-            ))}
+            )): <h1>No Restaurants Found</h1>
+          }
         </div>
         <button className="btn btn-warning mt-5 w-100">Load More</button>
       </div>
