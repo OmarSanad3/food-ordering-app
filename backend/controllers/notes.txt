@@ -1,0 +1,23 @@
+POST
+http://localhost:3000/signup
+headers: { 'Content-Type': 'application/json' },
+body: {
+    firstName: the data user entered,
+    lastName: the data user entered,
+    email: the data user entered,
+    password: the data user entered,
+}
+
+------------------------------------------
+
+POST
+http://localhost:3000/login
+headers: { 'Content-Type': 'application/json' },
+body: {
+    email: the data user entered,
+    password: the data user entered,
+}
+
+------------------------------------------
+
+
