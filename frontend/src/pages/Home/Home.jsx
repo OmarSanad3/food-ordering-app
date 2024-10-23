@@ -2,6 +2,7 @@ import classes from "./Home.module.css";
 import {  useNavigate } from "react-router-dom";
 import { useState } from "react";
 import img from "../../assets/dish1.webp";
+import axios from "axios";
 export default function Home() {
   const [selectedOption, setSelectedOption] = useState("Cairo");
   const navigate = useNavigate();
@@ -9,11 +10,20 @@ export default function Home() {
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value);
   };
-
-  const handleSearch = () => {
-    navigate(`/restaurants/${selectedOption}`);
+  
+  const handleSearch = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.get(`http://localhost:3000/restaurants/${selectedOption}`);
+      if (response.data) {
+        navigate(`/restaurants/${selectedOption}`);
+      } else {
+        console.log('Restaurant not found');
+      }
+    } catch (error) {
+      console.error('Error fetching restaurant data:', error);
+    }
   };
-
   return (
     <div className="container">
       <div className={classes.overlay}>

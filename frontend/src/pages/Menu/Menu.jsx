@@ -36,9 +36,9 @@ export default function Menu() {
             <div className="col-sm-8 me-auto">
               <div className="row">
                 <div className="col-sm-2">
-                  <img className="img-fluid" src="" width={120} height={150} />
+                  <img src = {productsDetails.logo} className="img-fluid"  width={120} height={150} />
                 </div>
-                <div className="col-sm-4 ">
+                <div className="col-sm-5 ">
                   <div className="title fs-2 mb-2">{productsDetails.name}</div>
                   <div className="adress text-black-50 mb-1">
                     {productsDetails.location}
@@ -143,8 +143,8 @@ export default function Menu() {
             ) : (
               <Info
                 name={productsDetails.name}
-                cheapestMealPrice={productsDetails.cheapestMealPrice}
-                deliveryTime={productsDetails.deliveryTime}
+                cheapestMealPrice={productsDetails.cheapestMeal}
+                deliveryTime={productsDetails.deleviryTime}
                 stars={productsDetails.stars}
                 tags={productsDetails.tags}
               />

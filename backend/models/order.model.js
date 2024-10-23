@@ -8,13 +8,10 @@ const orderSchema = new Schema({
     {
       meal: { type: Schema.Types.ObjectId, ref: "Meal", required: true },
       quantity: { type: Number, required: true },
-    },
+    }
   ],
   totalPrice: { type: Number, required: true },
-  status: { type: String, required: true },
-  date: { type: Date, required: true },
-});
+  status: { type: String },
+}, {timestamps: true});
 
 module.exports = mongoose.model("Order", orderSchema);
-
-// * ==================== Methods ==================== * //
