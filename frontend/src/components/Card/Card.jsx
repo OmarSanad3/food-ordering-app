@@ -52,7 +52,10 @@ function Card({ title, stars, reviews, offer, deliveryTime, location }) {
           <span> {offer ? offer : "NA"}</span>
         </div>
         <div className={styles.deliveryInfo}>
-          <span className={styles.deliveryTime}>🛵 {deliveryTime} mins</span>
+          <span className={styles.deliveryTime}>
+            <i className="fa-solid fa-motorcycle me-2 text-black-50"></i>
+            {deliveryTime} mins
+          </span>
           <span className={styles.orderOnline}>
             <i
               className="bi bi-circle-fill text-success "

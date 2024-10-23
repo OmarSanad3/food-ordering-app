@@ -118,6 +118,7 @@ function RestaurantPage() {
       <div className="col-2">
         <SideBar
           selectedOption={selectedOption}
+          selectedDish={selectedDish}
           handleSortChange={handleSortChange}
           handleSelectDish={handleSelectedDish}
         />
@@ -125,14 +126,17 @@ function RestaurantPage() {
 
       <div className="container text-center col-md-10 col-sm-12">
         <div className="row g-4 ">
-          { filteredCards.length > 0 ? filteredCards.map((card) => (
+          {filteredCards.length > 0 ? (
+            filteredCards.map((card) => (
               <div className="col" key={card.id}>
                 <Link to="menu">
                   <Card {...card} />
                 </Link>
               </div>
-            )): <h1>No Restaurants Found</h1>
-          }
+            ))
+          ) : (
+            <h1>No Restaurants Found</h1>
+          )}
         </div>
         <button className="btn btn-warning mt-5 w-100">Load More</button>
       </div>
