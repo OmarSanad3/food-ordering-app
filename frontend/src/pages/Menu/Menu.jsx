@@ -7,12 +7,16 @@ import Reviews from "../../components/Reviews/Reviews";
 import Info from "../../components/Info/Info";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { useContext } from "react";
+import { cartContext } from "../../context/AddToCartContext";
+
 
 export default function Menu() {
   const [selectedTab, setSelectedTab] = useState("menu");
   const [productsDetails, setproductsDetails] = useState(null)
+  const {addToCart}=useContext(cartContext)
   const{id}=useParams()
-  
+
  async function getProductsDetails(){
     await axios.get(`https://ecommerce.routemisr.com/api/v1/products/${id}`).then((res)=>{
       setproductsDetails(res.data.data)
@@ -28,51 +32,6 @@ export default function Menu() {
     
   }, [])
   
-const DATA_OBJECT = {
-  logo: "https://example.com/logo.png", // Logo URL
-  name: "Ahmed's Diner", // Restaurant name
-  location: "Downtown, Cairo", // Restaurant location
-  smallDescription: "A cozy place serving traditional Egyptian dishes.", // Short description
-  cheapestMealPrice: 50, // Cheapest meal price in EGP
-  deliveryTime: 45, // Delivery time in minutes
-  stars: 4.5, // Average rating (0 to 5)
-  tags: ["Egyptian", "Fast Food", "Vegetarian"], // Restaurant tags
-  menu: [
-    {
-      _id: "1", // Meal ID
-      title: "Koshary", // Meal title
-      image: "https://example.com/koshary.png", // Image URL for the meal
-      description:
-        "A popular Egyptian dish made of rice, pasta, lentils, and chickpeas.", // Meal description
-      price: 60, // Price of the meal in EGP
-    },
-    {
-      _id: "2", // Another meal ID
-      title: "Falafel Sandwich", // Meal title
-      image: "https://example.com/falafel.png", // Image URL for the meal
-      description:
-        "A sandwich filled with freshly fried falafel, veggies, and tahini sauce.", // Meal description
-      price: 30, // Price of the meal in EGP
-    },
-  ],
-  reviews: {
-    count: 2, // Total number of reviews
-    reviews: [
-      {
-        stars: 5, // Rating of the meal (0 to 5)
-        username: "user123", // Reviewer's username
-        feedback: "The koshary was amazing! Will definitely come again.", // Review text
-        date: new Date("2023-10-21"), // Date of the review
-      },
-      {
-        stars: 4, // Rating of the meal (0 to 5)
-        username: "foodieAhmed", // Another reviewer's username
-        feedback: "Loved the falafel, but it could have been crunchier.", // Review text
-        date: new Date("2023-10-20"), // Date of the review
-      },
-    ],
-  },
-};
 
   return (
     <>
@@ -162,7 +121,7 @@ const DATA_OBJECT = {
           <div className={`row ${styles.row3} pt-md-3`}>
             {selectedTab === "menu" ? (
               <div className="col-md-12 col-lg-9">
-                {DATA_OBJECT.menu.map((meal) => {
+                {productsDetails.menu.map((meal) => {
                   return (
                     <Order
                       key={meal._id}
@@ -176,7 +135,7 @@ const DATA_OBJECT = {
               </div>
             ) : selectedTab === "reviews" ? (
               <div className="col-md-12 col-lg-9">
-                {DATA_OBJECT.reviews.reviews.map((review, index) => {
+                {productsDetails.reviews.reviews.map((review, index) => {
                   return (
                     <Reviews
                       key={index}
@@ -190,11 +149,11 @@ const DATA_OBJECT = {
               </div>
             ) : (
               <Info
-                name={DATA_OBJECT.name}
-                cheapestMealPrice={DATA_OBJECT.cheapestMealPrice}
-                deliveryTime={DATA_OBJECT.deliveryTime}
-                stars={DATA_OBJECT.stars}
-                tags={DATA_OBJECT.tags}
+                name={productsDetails.name}
+                cheapestMealPrice={productsDetails.cheapestMealPrice}
+                deliveryTime={productsDetails.deliveryTime}
+                stars={productsDetails.stars}
+                tags={productsDetails.tags}
               />
             )}
 
