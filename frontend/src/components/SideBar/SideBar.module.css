@@ -30,18 +30,3 @@
     outline: 0;
     box-shadow: 0 0 0 .25rem rgba(233, 219, 60, 0.25);
 }
-
-
-.formCheck:checked {
-  background-color: var(--main-color);
-  border-color: var(--main-color) !important;
-}
-.formCheck:checked + label {
-  color: black !important;
-  font-weight: 400;
-}
-.formCheck:focus {
-  border-color: var(--main-color) !important;
-  outline: 0;
-  box-shadow: 0 0 0 .25rem rgba(233, 219, 60, 0.25);
-}

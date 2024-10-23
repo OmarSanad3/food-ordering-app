@@ -5,6 +5,7 @@ const sortingOptions = ["Popular", "Rating", "Delivery"];
 
 export default function SideBar({
   selectedOption,
+  selectedDish,
   handleSortChange,
   handleSelectDish,
 }) {
@@ -44,11 +45,11 @@ export default function SideBar({
           <div className="form-check" key={dish}>
             <input
               className={`form-check-input ${styles.formCheckInput}`}
+              onChange={() => handleSelectDish(dish)}
               type="radio"
               name="Dishes"
               id={dish}
-              checked={handleSelectDish === dish}
-              onChange={() => handleSelectDish(dish)}
+              checked={selectedDish === dish}
             />
             <label className="form-check-label text-black-50" htmlFor={dish}>
               {dish}

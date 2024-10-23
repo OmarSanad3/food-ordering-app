@@ -151,24 +151,21 @@ export default function Menu() {
                       price={meal.price}
                     />
                   );
-                }
-                )}
+                })}
               </div>
             ) : selectedTab === "reviews" ? (
               <div className="col-md-12 col-lg-9">
-                {
-                  DATA_OBJECT.reviews.reviews.map((review, index) => {
-                    return (
-                      <Reviews
-                        key={index}
-                        stars={review.stars}
-                        username={review.username}
-                        feedback={review.feedback}
-                        date={review.date.toDateString()}
-                      />
-                    );
-                  })
-                }
+                {DATA_OBJECT.reviews.reviews.map((review, index) => {
+                  return (
+                    <Reviews
+                      key={index}
+                      stars={review.stars}
+                      username={review.username}
+                      feedback={review.feedback}
+                      date={review.date.toDateString()}
+                    />
+                  );
+                })}
               </div>
             ) : (
               <Info
@@ -176,7 +173,7 @@ export default function Menu() {
                 cheapestMealPrice={DATA_OBJECT.cheapestMealPrice}
                 deliveryTime={DATA_OBJECT.deliveryTime}
                 stars={DATA_OBJECT.stars}
-                tags = {DATA_OBJECT.tags}
+                tags={DATA_OBJECT.tags}
               />
             )}
 
