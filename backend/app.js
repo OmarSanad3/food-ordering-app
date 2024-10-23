@@ -28,10 +28,12 @@ app.use((req, res, next) => {
 });
 
 app.use(userRoute);
-app.use(adminRoutes);
 app.use(restaurantRoutes);
+app.use("/admin", adminRoutes);
 
 app.use((error, req, res, next) => {
+  console.error("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
+
   const status = error.statusCode || 500;
   const message = error.message;
   const data = error.data;
