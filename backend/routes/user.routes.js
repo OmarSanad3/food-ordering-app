@@ -23,10 +23,14 @@ router.post(
         return true;
       })
       .normalizeEmail(),
+    body("phoneNumber")
+      .trim()
+      .matches(/^01[0125][0-9]{8}$/)
+      .withMessage("Please enter a valid Egyptian phone number."),
     body("password")
       .trim()
       .isLength({ min: 5 })
-      .withMessage("Password must be at least 5 characters long."),
+      .withMessage("Password must be at least 5 characters long.")
   ],
   userController.signup
 );
