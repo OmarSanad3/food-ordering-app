@@ -1,3 +1,4 @@
+import StarRating from "../StarRating/StarRating";
 export default function Info({name , cheapestMealPrice , deliveryTime , stars , tags}) {
   return (
     <div className="col-md-12 col-lg-9">
@@ -23,18 +24,7 @@ export default function Info({name , cheapestMealPrice , deliveryTime , stars , 
         <hr />
         <div className="col-md-12 d-flex justify-content-between">
           <p className="fs-5 ">Rating</p>
-          <span>
-            {[...Array(5)].map((_, index) => {
-              if (index < Math.floor(stars)) {
-                return <i key={index} className="bi bi-star-fill text-warning"></i>;
-              } else if (index < stars) {
-                return <i key={index} className="bi bi-star-half text-warning"></i>;
-              }
-              else {
-                return <i key={index} className="bi bi-star text-warning"></i>;
-              }
-            })}
-          </span>
+            <StarRating stars={stars} />
         </div>
         <hr />
         <div className="col-md-12 d-flex justify-content-between">
