@@ -18,52 +18,60 @@ export default function Register() {
 
 
   const mySchema = yup.object({
-    name: yup
+    firstName:yup
       .string()
       .required("Name is Required")
       .min(3, "must be more than 3 chars")
       .max(10, "must be less than 10"),
-    phone: yup
+      lastName:yup
       .string()
-      .required("phone is required")
-      .length(11, "must be 11 digit"),
+      .required("Name is Required")
+      .min(3, "must be more than 3 chars")
+      .max(10, "must be less than 10"),
+    // phone: yup
+    //   .string()
+    //   .required("phone is required")
+    //   .length(11, "must be 11 digit"),
     email: yup
       .string()
       .required("email is required")
       .email("enter avalid email"),
     password: yup.string().required("password is required").min(6).max(12),
-    rePassword: yup
-      .string()
-      .required("Repassword is required")
-      .oneOf([yup.ref("password")], "Passwords must match"),
+    // rePassword: yup
+    //   .string()
+    //   .required("Repassword is required")
+    //   .oneOf([yup.ref("password")], "Passwords must match"),
   });
   const userData = {
-    name: "",
+
+    firstName: "",
+    lastName: "",
     email: "",
-    phone: "",
-    password: "",
-    rePassword: "",
+    // phone:"",
+    password: ""
   };
   async function sendUserData(values) {
     setIsLoading(true);
     try {
       const res=await axios.post(
-        "https://ecommerce.routemisr.com/api/v1/auth/signup",
+        "http://localhost:3000/signup",
         values
       );
       localStorage.setItem("tkn",res.data.token)
       setToken(res.data.token)
+      console.log("res",res);
+      
       setisPost(true);
       seterrMessage(undefined);
       setTimeout(function () {
-        navigate("/resturants");
+        navigate("/restaurant");
       }, 1000);
     } catch (e) {
-      if (e.response && e.response.status === 409) {
-        seterrMessage(e.response.data.message); // Conflict: User already exists
+      if (e.response && e.response.status === 422) {
+        seterrMessage(e.response.data.data[0].msg); // Conflict: User already exists
         setisPost(false);
       } else {
-        console.log("error", e);
+        console.log("error resons", e.response.data.data[0].msg);
       }
     }
     setIsLoading(false);
@@ -97,14 +105,26 @@ export default function Register() {
         <input
           onChange={myFormik.handleChange}
           onBlur={myFormik.handleBlur}
-          value={myFormik.values.name}
+          value={myFormik.values.firstName}
           type="text"
-          id="name"
-          placeholder="Enter your name"
+          id="firstName"
+          placeholder="Enter your firstName"
           className="form-control mb-4"
         />
-        {myFormik.errors.name && myFormik.touched.name && (
-          <div className="alert alert-danger">{myFormik.errors.name}</div>
+        {myFormik.errors.firstName && myFormik.touched.firstName && (
+          <div className="alert alert-danger">{myFormik.errors.firstName}</div>
+        )}
+        <input
+          onChange={myFormik.handleChange}
+          onBlur={myFormik.handleBlur}
+          value={myFormik.values.lastName}
+          type="text"
+          id="lastName"
+          placeholder="Enter your lastName"
+          className="form-control mb-4"
+        />
+        {myFormik.errors.firstName && myFormik.touched.lastName && (
+          <div className="alert alert-danger">{myFormik.errors.lastName}</div>
         )}
 
         <input
@@ -120,7 +140,7 @@ export default function Register() {
           <div className="alert alert-danger">{myFormik.errors.email}</div>
         )}
 
-        <input
+        {/* <input
           onChange={myFormik.handleChange}
           onBlur={myFormik.handleBlur}
           value={myFormik.values.phone}
@@ -131,7 +151,7 @@ export default function Register() {
         />
         {myFormik.errors.phone && myFormik.touched.phone && (
           <div className="alert alert-danger">{myFormik.errors.phone}</div>
-        )}
+        )} */}
 
         <input
           onChange={myFormik.handleChange}
@@ -146,7 +166,7 @@ export default function Register() {
           <div className="alert alert-danger">{myFormik.errors.password}</div>
         )}
 
-        <input
+        {/* <input
           onChange={myFormik.handleChange}
           onBlur={myFormik.handleBlur}
           value={myFormik.values.rePassword}
@@ -157,7 +177,7 @@ export default function Register() {
         />
         {myFormik.errors.rePassword && myFormik.touched.rePassword && (
           <div className="alert alert-danger">{myFormik.errors.rePassword}</div>
-        )}
+        )} */}
 
         <button
           type="submit"

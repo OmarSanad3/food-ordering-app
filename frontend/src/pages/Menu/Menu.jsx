@@ -7,13 +7,10 @@ import Reviews from "../../components/Reviews/Reviews";
 import Info from "../../components/Info/Info";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { useContext } from "react";
-import { cartContext } from "../../context/AddToCartContext";
 
 
 export default function Menu() {
   const [selectedTab, setSelectedTab] = useState("menu");
-  const {addToCart}=useContext(cartContext)
   const [productsDetails, setproductsDetails] = useState([]);
   const { id } = useParams();
 
@@ -125,6 +122,7 @@ export default function Menu() {
                     return (
                       <Order
                         key={meal._id}
+                        mealId={meal._id}
                         title={meal.title}
                         image={meal.image}
                         description={meal.description}
