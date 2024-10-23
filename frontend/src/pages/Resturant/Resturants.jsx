@@ -5,74 +5,151 @@ import { useContext, useState, useCallback } from "react";
 import { AppContext } from "../../context/AppContext";
 const restaurantCardArray = [
   {
-    id: 1,
+    _id: "1",
     title: "Bufflo",
-    stars: 4,
-    reviews: 3981,
-    offer: null,
-    deliveryTime: 60,
-    location: "Made in Egypt • Chinese",
-    category: "Burger",
+    rating: {
+      stars: 4,
+      reviewsCount: 3981,
+    },
+    location: "Made in Egypt",
+    smallDescription: "A wide selection of Chinese-inspired burgers.",
+    tags: ["Burger"],
+    deleviryTime: 60,
+    cheapestMeal: {
+      name: "Classic Burger",
+      price: 7.99,
+    },
+    topDish: {
+      name: "Buffalo Burger",
+      image: "https://example.com/buffalo-burger.png",
+      price: 12.99,
+    },
   },
   {
-    id: 2,
+    _id: "2",
     title: "Amr Elsoury",
-    stars: 4.5,
-    reviews: 3081,
-    offer: null,
-    deliveryTime: 60,
-    location: "Made in Egypt • Chinese",
-    category: "Shawerma",
+    rating: {
+      stars: 4.5,
+      reviewsCount: 3081,
+    },
+    location: "Made in Egypt",
+    smallDescription: "Authentic Shawerma with traditional spices.",
+    tags: ["Shawerma"],
+    deleviryTime: 60,
+    cheapestMeal: {
+      name: "Chicken Shawerma",
+      price: 6.99,
+    },
+    topDish: {
+      name: "Beef Shawerma",
+      image: "https://example.com/beef-shawerma.png",
+      price: 11.99,
+    },
   },
   {
-    id: 3,
+    _id: "3",
     title: "KFC",
-    stars: 3.5,
-    reviews: 3908,
-    offer: "40 EGP on orders above 150 EGP",
-    deliveryTime: 40,
-    location: "Made in Egypt • Chinese",
-    category: "Fried Chicken",
+    rating: {
+      stars: 3.5,
+      reviewsCount: 3908,
+    },
+    location: "Made in Egypt",
+    smallDescription: "Crispy fried chicken and sides.",
+    tags: ["Fried Chicken"],
+    deleviryTime: 40,
+    cheapestMeal: {
+      name: "2 Piece Chicken",
+      price: 8.99,
+    },
+    topDish: {
+      name: "Bucket of Chicken",
+      image: "https://example.com/kfc-bucket.png",
+      price: 25.99,
+    },
   },
   {
-    id: 4,
+    _id: "4",
     title: "Subway",
-    stars: 4,
-    reviews: 3981,
-    offer: null,
-    deliveryTime: 30,
-    location: "Made in Egypt • Chinese",
-    category: "Pizza",
+    rating: {
+      stars: 4,
+      reviewsCount: 3981,
+    },
+    location: "Made in Egypt",
+    smallDescription: "Freshly made subs with a variety of toppings.",
+    tags: ["Pizza"],
+    deleviryTime: 30,
+    cheapestMeal: {
+      name: "Veggie Sub",
+      price: 5.99,
+    },
+    topDish: {
+      name: "Chicken Teriyaki Sub",
+      image: "https://example.com/subway-teriyaki.png",
+      price: 9.99,
+    },
   },
   {
-    id: 5,
+    _id: "5",
     title: "Oldies",
-    stars: 2,
-    reviews: 9081,
-    offer: "40% off on orders above 150 EGP",
-    deliveryTime: 40,
-    location: "Made in Egypt • Chinese",
-    category: "Burger",
+    rating: {
+      stars: 2,
+      reviewsCount: 9081,
+    },
+    location: "Made in Egypt",
+    smallDescription: "Classic burgers with a retro vibe.",
+    tags: ["Burger"],
+    deleviryTime: 40,
+    cheapestMeal: {
+      name: "Cheeseburger",
+      price: 6.99,
+    },
+    topDish: {
+      name: "Double Oldie Burger",
+      image: "https://example.com/oldies-double.png",
+      price: 11.99,
+    },
   },
   {
-    id: 6,
+    _id: "6",
     title: "Moodes",
-    stars: 4,
-    reviews: 81,
-    offer: null,
-    deliveryTime: 65,
-    location: "Made in Egypt • Chinese",
-    category: "Burger",
+    rating: {
+      stars: 4,
+      reviewsCount: 81,
+    },
+    location: "Made in Egypt",
+    smallDescription: "Delicious gourmet burgers.",
+    tags: ["Burger"],
+    deleviryTime: 65,
+    cheapestMeal: {
+      name: "Mushroom Burger",
+      price: 9.99,
+    },
+    topDish: {
+      name: "Moodes Special Burger",
+      image: "https://example.com/moodes-special.png",
+      price: 12.99,
+    },
   },
   {
-    id: 7,
-    title: "Koshary shawky",
-    stars: 4,
-    reviews: 101,
-    offer: null,
-    deliveryTime: 20,
-    location: "Made in Egypt • Chinese",
-    category: "Koshary",
+    _id: "7",
+    title: "Koshary Shawky",
+    rating: {
+      stars: 4,
+      reviewsCount: 101,
+    },
+    location: "Made in Egypt",
+    smallDescription: "Traditional Egyptian Koshary.",
+    tags: ["Koshary"],
+    deleviryTime: 20,
+    cheapestMeal: {
+      name: "Small Koshary",
+      price: 2.99,
+    },
+    topDish: {
+      name: "Large Koshary",
+      image: "https://example.com/large-koshary.png",
+      price: 5.99,
+    },
   },
 ];
 
@@ -81,18 +158,17 @@ function RestaurantPage() {
 
   const [selectedOption, setSelectedOption] = useState("Popular");
   const [selectedDish, setSelectedDish] = useState("All");
-
   const [sortedCards, setSortedCards] = useState(restaurantCardArray);
 
   const handleSortChange = useCallback((option) => {
     setSelectedOption(option);
     let sortedArray = [...restaurantCardArray];
     if (option === "Rating") {
-      sortedArray.sort((a, b) => b.stars - a.stars);
+      sortedArray.sort((a, b) => b.rating.stars - a.rating.stars);
     } else if (option === "Delivery") {
-      sortedArray.sort((a, b) => a.deliveryTime - b.deliveryTime);
+      sortedArray.sort((a, b) => a.deleviryTime - b.deleviryTime);
     } else {
-      sortedArray.sort((a, b) => b.reviews - a.reviews);
+      sortedArray.sort((a, b) => b.rating.reviewsCount - a.rating.reviewsCount);
     }
     setSortedCards(sortedArray);
   }, []);
@@ -104,7 +180,7 @@ function RestaurantPage() {
   const filterCards = (cards, selectedDish, search) => {
     return cards.filter((item) => {
       return (
-        (selectedDish === "All" || item.category === selectedDish) &&
+        (selectedDish === "All" ||  item.tags.includes(selectedDish)) &&
         (search.toLowerCase() === "" ||
           item.title.toLowerCase().includes(search.toLowerCase()))
       );
@@ -144,9 +220,9 @@ function RestaurantPage() {
         <div className="row g-4 ">
           {filteredCards.length > 0 ? (
             filteredCards.map((restaurant) => (
-              <div className="col" key={restaurant.id}>
-                <Link to={`/menu/${restaurant.id}`}>
-                  <Card {...restaurant} />
+              <div className="col" key={restaurant._id}>
+                <Link to={`/menu/${restaurant._id}`}>
+                  <Card  title = {restaurant.title} stars = {restaurant.rating.stars} reviews = {restaurant.rating.reviewsCount} deliveryTime = {restaurant.deleviryTime} location = {restaurant.location} />
                 </Link>
               </div>
             ))

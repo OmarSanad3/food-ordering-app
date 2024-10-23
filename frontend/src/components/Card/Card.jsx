@@ -2,7 +2,7 @@ import styles from "./Card.module.css"; // Importing the CSS module
 import img from "../../assets/dish1.webp";
 import StarRating from "../StarRating/StarRating";
 //  title stars reviews offer deliveryTime  location / there is image and price remaining
-function Card({ title, stars, reviews, offer, deliveryTime, location }) {
+function Card({ title, stars, reviews, offer = "Discount", deliveryTime, location }) {
   return (
     <div className={styles.cardContainer}>
       <div className={styles.imageSection}>
