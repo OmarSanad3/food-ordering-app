@@ -1,5 +1,6 @@
 import styles from "./Card.module.css"; // Importing the CSS module
 import img from "../../assets/dish1.webp";
+import StarRating from "../StarRating/StarRating";
 //  title stars reviews offer deliveryTime  location / there is image and price remaining
 function Card({ title, stars, reviews, offer, deliveryTime, location }) {
   return (
@@ -18,23 +19,7 @@ function Card({ title, stars, reviews, offer, deliveryTime, location }) {
         <div className="d-flex justify-content-between ">
           <h3 className={styles.restaurantName}>{title}</h3>
           <div className={styles.rating}>
-            <span className={styles.stars}>
-              {[...Array(5)].map((_, index) => {
-                if (index < Math.floor(stars)) {
-                  return (
-                    <i key={index} className="bi bi-star-fill text-warning"></i>
-                  );
-                } else if (index < stars) {
-                  return (
-                    <i key={index} className="bi bi-star-half text-warning"></i>
-                  );
-                } else {
-                  return (
-                    <i key={index} className="bi bi-star text-warning"></i>
-                  );
-                }
-              })}
-            </span>
+            <StarRating stars={stars} />
             <span className={styles.ratingNumber}> ({reviews}) </span>
           </div>
         </div>

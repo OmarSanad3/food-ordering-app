@@ -1,5 +1,4 @@
 import img from "../../assets/dish1.webp";
-import styles from "./Order.module.css";
 
 export default function Order({ title , image , description , price}) {
   return (
