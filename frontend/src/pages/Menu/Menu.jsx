@@ -10,69 +10,69 @@ import axios from "axios";
 
 export default function Menu() {
   const [selectedTab, setSelectedTab] = useState("menu");
-  const [productsDetails, setproductsDetails] = useState(null)
-  const{id}=useParams()
-  
- async function getProductsDetails(){
-    await axios.get(`https://ecommerce.routemisr.com/api/v1/products/${id}`).then((res)=>{
-      setproductsDetails(res.data.data)
-      console.log(res.data.data);
-      
-    }).catch((err)=>{
-      console.log(err);
-      
-    })
+  const [productsDetails, setproductsDetails] = useState(null);
+  const { id } = useParams();
+
+  async function getProductsDetails() {
+    await axios
+      .get(`https://ecommerce.routemisr.com/api/v1/products/${id}`)
+      .then((res) => {
+        setproductsDetails(res.data.data);
+        console.log(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
   useEffect(() => {
-    getProductsDetails()
-    
-  }, [])
-  
-const DATA_OBJECT = {
-  logo: "https://example.com/logo.png", // Logo URL
-  name: "Ahmed's Diner", // Restaurant name
-  location: "Downtown, Cairo", // Restaurant location
-  smallDescription: "A cozy place serving traditional Egyptian dishes.", // Short description
-  cheapestMealPrice: 50, // Cheapest meal price in EGP
-  deliveryTime: 45, // Delivery time in minutes
-  stars: 4.5, // Average rating (0 to 5)
-  tags: ["Egyptian", "Fast Food", "Vegetarian"], // Restaurant tags
-  menu: [
-    {
-      _id: "1", // Meal ID
-      title: "Koshary", // Meal title
-      image: "https://example.com/koshary.png", // Image URL for the meal
-      description:
-        "A popular Egyptian dish made of rice, pasta, lentils, and chickpeas.", // Meal description
-      price: 60, // Price of the meal in EGP
-    },
-    {
-      _id: "2", // Another meal ID
-      title: "Falafel Sandwich", // Meal title
-      image: "https://example.com/falafel.png", // Image URL for the meal
-      description:
-        "A sandwich filled with freshly fried falafel, veggies, and tahini sauce.", // Meal description
-      price: 30, // Price of the meal in EGP
-    },
-  ],
-  reviews: {
-    count: 2, // Total number of reviews
-    reviews: [
+    getProductsDetails();
+  }, []);
+
+  const DATA_OBJECT = {
+    logo: "https://example.com/logo.png", // Logo URL
+    name: "Ahmed's Diner", // Restaurant name
+    location: "Downtown, Cairo", // Restaurant location
+    smallDescription: "A cozy place serving traditional Egyptian dishes.", // Short description
+    cheapestMealPrice: 50, // Cheapest meal price in EGP
+    deliveryTime: 45, // Delivery time in minutes
+    stars: 4.5, // Average rating (0 to 5)
+    tags: ["Egyptian", "Fast Food", "Vegetarian"], // Restaurant tags
+    menu: [
       {
-        stars: 5, // Rating of the meal (0 to 5)
-        username: "user123", // Reviewer's username
-        feedback: "The koshary was amazing! Will definitely come again.", // Review text
-        date: new Date("2023-10-21"), // Date of the review
+        _id: "1", // Meal ID
+        title: "Koshary", // Meal title
+        image: "https://example.com/koshary.png", // Image URL for the meal
+        description:
+          "A popular Egyptian dish made of rice, pasta, lentils, and chickpeas.", // Meal description
+        price: 60, // Price of the meal in EGP
       },
       {
-        stars: 4, // Rating of the meal (0 to 5)
-        username: "foodieAhmed", // Another reviewer's username
-        feedback: "Loved the falafel, but it could have been crunchier.", // Review text
-        date: new Date("2023-10-20"), // Date of the review
+        _id: "2", // Another meal ID
+        title: "Falafel Sandwich", // Meal title
+        image: "https://example.com/falafel.png", // Image URL for the meal
+        description:
+          "A sandwich filled with freshly fried falafel, veggies, and tahini sauce.", // Meal description
+        price: 30, // Price of the meal in EGP
       },
     ],
-  },
-};
+    reviews: {
+      count: 2, // Total number of reviews
+      reviews: [
+        {
+          stars: 5, // Rating of the meal (0 to 5)
+          username: "user123", // Reviewer's username
+          feedback: "The koshary was amazing! Will definitely come again.", // Review text
+          date: new Date("2023-10-21"), // Date of the review
+        },
+        {
+          stars: 4, // Rating of the meal (0 to 5)
+          username: "foodieAhmed", // Another reviewer's username
+          feedback: "Loved the falafel, but it could have been crunchier.", // Review text
+          date: new Date("2023-10-20"), // Date of the review
+        },
+      ],
+    },
+  };
 
   return (
     <>
@@ -82,12 +82,7 @@ const DATA_OBJECT = {
             <div className="col-sm-8 me-auto">
               <div className="row">
                 <div className="col-sm-2">
-                  <img
-                    className="img-fluid"
-                    src=""
-                    width={120}
-                    height={150}
-                  />
+                  <img className="img-fluid" src="" width={120} height={150} />
                 </div>
                 <div className="col-sm-4 ">
                   <div className="title fs-2 mb-2">{DATA_OBJECT.name}</div>

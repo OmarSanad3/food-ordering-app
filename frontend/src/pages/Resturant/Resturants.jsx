@@ -1,7 +1,7 @@
 import Card from "../../components/Card/Card";
 import SideBar from "../../components/SideBar/SideBar";
 import { Link } from "react-router-dom";
-import { useContext, useState , useCallback  } from "react";
+import { useContext, useState, useCallback } from "react";
 import { AppContext } from "../../context/AppContext";
 const restaurantCardArray = [
   {
@@ -95,7 +95,7 @@ function RestaurantPage() {
       sortedArray.sort((a, b) => b.reviews - a.reviews);
     }
     setSortedCards(sortedArray);
-  } , []);
+  }, []);
 
   const handleSelectedDish = useCallback((dish) => {
     setSelectedDish(dish);
@@ -113,23 +113,22 @@ function RestaurantPage() {
 
   const filteredCards = filterCards(sortedCards, selectedDish, search);
 
-
   // const [products, setproducts] = useState(null)
   // async function getProducts(){
-  //   await axios.get(`https://ecommerce.routemisr.com/api/v1/products`).then((res)=>{
+  //   await axios.get(`localhost:3000/restaurants`).then((res)=>{
   //     setproducts(res.data.data)
   //     console.log(res.data.data);
-      
+
   //   }).catch((err)=>{
   //     console.log(err);
-      
+
   //   })
   // }
   // useEffect(() => {
   //   getProducts()
-    
+
   // }, [])
-  
+
   return (
     <div className="row restaurant-page mt-5">
       <div className="col-2">
