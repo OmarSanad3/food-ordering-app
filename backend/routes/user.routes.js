@@ -30,7 +30,7 @@ router.post(
     body("password")
       .trim()
       .isLength({ min: 5 })
-      .withMessage("Password must be at least 5 characters long.")
+      .withMessage("Password must be at least 5 characters long."),
   ],
   userController.signup
 );
@@ -40,8 +40,6 @@ router.get("/cart", isAuth, userController.getCart);
 router.get("/orders", isAuth, userController.getOrders);
 
 // router.get('/checkout', isAuth, userController.getCheckout);
-
-router.post("/add-review", isAuth, userController.addReview);
 
 router.post("/login", userController.login);
 

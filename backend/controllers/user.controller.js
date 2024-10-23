@@ -10,7 +10,6 @@ const Review = require("../models/review.model");
 
 // const stripe = require('stripe')('sk_test_51QD6qNDntxRgMHhGwYb7wc61SfMlvx4M8v0giXpzEuqQKdaAyRbykU2uYD5Bf5hNDdvZxSQl9RC0eTklpH40aIwT00rggDr27l');
 
-
 exports.login = async (req, res, next) => {
   const { email, password } = req.body;
 
@@ -40,7 +39,11 @@ exports.login = async (req, res, next) => {
       { expiresIn: "1h" }
     );
 
-    res.status(200).json({ message: "Logged In Successfully", token, userId: user._id.toString() });
+    res.status(200).json({
+      message: "Logged In Successfully",
+      token,
+      userId: user._id.toString(),
+    });
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;
@@ -59,9 +62,10 @@ exports.signup = async (req, res, next) => {
     return next(error);
   }
 
-  const { firstName, lastName, email, phoneNumber, password, confirmPassword } = req.body;
+  const { firstName, lastName, email, phoneNumber, password, confirmPassword } =
+    req.body;
 
-  if(password != confirmPassword) {
+  if (password != confirmPassword) {
     const error = new Error("Password and confirm password do not match");
     error.statusCode = 404;
     return next(error);
@@ -76,7 +80,7 @@ exports.signup = async (req, res, next) => {
       email,
       phoneNumber,
       password: hashedPw,
-      confirmPassword: hashedPw
+      confirmPassword: hashedPw,
     });
 
     await user.save();
@@ -90,7 +94,9 @@ exports.signup = async (req, res, next) => {
       { expiresIn: "1h" }
     );
 
-    res.status(201).json({ message: "User created!", token, userId: user._id.toString() });
+    res
+      .status(201)
+      .json({ message: "User created!", token, userId: user._id.toString() });
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;
@@ -229,36 +235,4 @@ exports.getOrders = async (req, res, next) => {
   return res
     .status(200)
     .json({ message: "Orders retrieved successfully", orders });
-};
-
-exports.addReview = async (req, res, next) => {
-  const userId = req.userId;
-  const { restaurantId, stars, feedback } = req.body;
-
-  const user = await User.findById(userId);
-
-  if (!user) {
-    return res.status(404).json({ message: "User not found" });
-  }
-
-  const restaurant = await Restaurant.findById(restaurantId);
-
-  if (!restaurant) {
-    return res.status(404).json({ message: "Restaurant not found" });
-  }
-
-  const review = new Review({
-    restaurant: restaurantId,
-    user: userId,
-    stars,
-    feedback,
-  });
-
-  await review.save();
-
-  restaurant.push(review._id);
-
-  await restaurant.save();
-
-  return res.status(200).json({ message: "Review added successfully", review });
 };
