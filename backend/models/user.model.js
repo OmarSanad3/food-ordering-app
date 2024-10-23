@@ -9,35 +9,54 @@ const userSchema = new Schema({
   password: { type: String, required: true },
   cart: [
     {
-      meal: { type: Schema.Types.ObjectId, ref: "Meal" },
-      quantity: { type: Number },
+      mealId: { type: Schema.Types.ObjectId, ref: "Meal" },
+      quantity: { type: Number }
     },
   ],
-  orders: [{ type: Schema.Types.ObjectId, ref: "Order" }],
+  orders: [{ type: Schema.Types.ObjectId, ref: "Order" }]
 });
 
-userSchema.methods.addToCart = function (product) {
-  const cartProductIndex = this.cart.items.findIndex((cp) => {
-    return cp.productId.toString() === product._id.toString();
+
+userSchema.methods.addToCart = function (meal) {
+  const cartMealIndex = this.cart.findIndex(m => {
+    return m.mealId.toString() === meal._id.toString();
   });
 
-  let newQuantity = 1;
-  const updatedCartItems = [...this.cart.items];
-
-  if (cartProductIndex >= 0) {
-    // this.cart.items[cartProductIndex].quantity++;
-
-    newQuantity = this.cart.items[cartProductIndex].quantity + 1;
-    updatedCartItems[cartProductIndex].quantity = newQuantity;
+  if (cartMealIndex >= 0) {
+    this.cart[cartMealIndex].quantity++;
   } else {
-    updatedCartItems.push({ productId: product._id, quantity: 1 });
-    // this.cart.items.push({productId: product._id, quantity: 1});
+    this.cart.push({ mealId: meal._id, quantity: 1 });
   }
-
-  const updatedCart = { items: updatedCartItems };
-  this.cart = updatedCart;
 
   return this.save();
 };
+
+userSchema.methods.removeFromCart = async function(mealId) {
+  const updatedCartItems = this.cart.filter(m => {
+    return m.mealId.toString() !== mealId.toString();
+  });
+
+  if(this.cart.length == updatedCartItems.length) {
+    return "This Meal Does not exist in the cart";
+  }
+
+  this.cart = updatedCartItems;
+  await this.save();
+
+  return "Removed Meal From The Cart Successfully";
+}
+
+userSchema.methods.clearCart = function() {
+  this.cart = [];
+
+  return this.save();
+}
+
+userSchema.methods.addorder = function (order) {
+  this.cart = [];
+  this.orders.push(order);
+
+  return this.save();
+}
 
 module.exports = mongoose.model("User", userSchema);

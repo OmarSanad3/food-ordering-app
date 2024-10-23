@@ -19,5 +19,63 @@ body: {
 }
 
 ------------------------------------------
+------------------------------------------
 
 
+GET
+http://localhost:3000/cart
+headers: {
+    'Content-Type' : 'application/json',
+    'Authorization': 'Bearer ' + token
+}
+
+------------------------------------------
+
+POST
+http://localhost:3000/add-to-cart
+headers: {
+    'Content-Type' : 'application/json',
+    'Authorization': 'Bearer ' + token
+}
+body: {
+    mealId: ""
+}
+
+------------------------------------------
+
+DELETE
+http://localhost:3000/cart-delete-meal
+headers: {
+    'Content-Type' : 'application/json',
+    'Authorization': 'Bearer ' + token
+}
+body: {
+    mealId: ""
+}
+
+------------------------------------------
+
+DELETE
+http://localhost:3000/clear-cart
+headers: {
+    'Content-Type' : 'application/json',
+    'Authorization': 'Bearer ' + token
+}
+
+------------------------------------------
+
+GET
+http://localhost:3000/orders
+headers: {
+    'Content-Type' : 'application/json',
+    'Authorization': 'Bearer ' + token
+}
+
+------------------------------------------
+
+POST
+http://localhost:3000/order
+headers: {
+    'Content-Type' : 'application/json',
+    'Authorization': 'Bearer ' + token
+}
