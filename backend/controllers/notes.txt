@@ -25,8 +25,7 @@ body: {
 GET
 http://localhost:3000/cart
 headers: {
-    'Content-Type' : 'application/json',
-    'Authorization': 'Bearer ' + token
+    'Authorization': token
 }
 
 ------------------------------------------
@@ -34,8 +33,7 @@ headers: {
 POST
 http://localhost:3000/add-to-cart
 headers: {
-    'Content-Type' : 'application/json',
-    'Authorization': 'Bearer ' + token
+    'Authorization': token
 }
 body: {
     mealId: ""
@@ -44,10 +42,9 @@ body: {
 ------------------------------------------
 
 DELETE
-http://localhost:3000/cart-delete-meal
+http://localhost:3000/remove-from-cart/:mealId
 headers: {
-    'Content-Type' : 'application/json',
-    'Authorization': 'Bearer ' + token
+    'Authorization': token
 }
 body: {
     mealId: ""
@@ -58,8 +55,7 @@ body: {
 DELETE
 http://localhost:3000/clear-cart
 headers: {
-    'Content-Type' : 'application/json',
-    'Authorization': 'Bearer ' + token
+    'Authorization': token
 }
 
 ------------------------------------------
@@ -67,8 +63,7 @@ headers: {
 GET
 http://localhost:3000/orders
 headers: {
-    'Content-Type' : 'application/json',
-    'Authorization': 'Bearer ' + token
+    'Authorization': token
 }
 
 ------------------------------------------
@@ -76,6 +71,5 @@ headers: {
 POST
 http://localhost:3000/order
 headers: {
-    'Content-Type' : 'application/json',
-    'Authorization': 'Bearer ' + token
+    'Authorization': token
 }

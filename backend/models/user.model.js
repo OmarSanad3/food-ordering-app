@@ -10,15 +10,14 @@ const userSchema = new Schema({
   cart: [
     {
       mealId: { type: Schema.Types.ObjectId, ref: "Meal" },
-      quantity: { type: Number }
+      quantity: { type: Number },
     },
   ],
-  orders: [{ type: Schema.Types.ObjectId, ref: "Order" }]
+  orders: [{ type: Schema.Types.ObjectId, ref: "Order" }],
 });
 
-
 userSchema.methods.addToCart = function (meal) {
-  const cartMealIndex = this.cart.findIndex(m => {
+  const cartMealIndex = this.cart.findIndex((m) => {
     return m.mealId.toString() === meal._id.toString();
   });
 
@@ -31,32 +30,40 @@ userSchema.methods.addToCart = function (meal) {
   return this.save();
 };
 
-userSchema.methods.removeFromCart = async function(mealId) {
-  const updatedCartItems = this.cart.filter(m => {
-    return m.mealId.toString() !== mealId.toString();
-  });
+userSchema.methods.removeFromCart = async function (mealId) {
+  const cartMealIndex = this.cart.findIndex(
+    (meal) => meal.mealId.toString() === mealId.toString()
+  );
 
-  if(this.cart.length == updatedCartItems.length) {
+  if (cartMealIndex < 0) {
     return "This Meal Does not exist in the cart";
+  }
+
+  const updatedCartItems = [...this.cart];
+
+  updatedCartItems[cartMealIndex].quantity--;
+
+  if (updatedCartItems[cartMealIndex].quantity <= 0) {
+    updatedCartItems.splice(cartMealIndex, 1);
   }
 
   this.cart = updatedCartItems;
   await this.save();
 
   return "Removed Meal From The Cart Successfully";
-}
+};
 
-userSchema.methods.clearCart = function() {
+userSchema.methods.clearCart = function () {
   this.cart = [];
 
   return this.save();
-}
+};
 
 userSchema.methods.addorder = function (order) {
   this.cart = [];
   this.orders.push(order);
 
   return this.save();
-}
+};
 
 module.exports = mongoose.model("User", userSchema);

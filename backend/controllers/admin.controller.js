@@ -11,7 +11,7 @@ module.exports.addRestaurant = async (req, res, next) => {
     deleviryTime,
     topDish,
     offer,
-    rating,
+    tags,
   } = req.body;
 
   const restaurant = new Restaurant({
@@ -22,7 +22,8 @@ module.exports.addRestaurant = async (req, res, next) => {
     cheapestMeal,
     deleviryTime,
     topDish,
-    offer,
+    offer, // not required
+    tags, // not required
   });
 
   try {
@@ -81,6 +82,7 @@ module.exports.editRestaurant = async (req, res, next) => {
     deleviryTime,
     topDish,
     offer,
+    tags,
   } = req.body;
 
   const restaurant = await Restaurant.findById(restaurantId);
@@ -93,6 +95,7 @@ module.exports.editRestaurant = async (req, res, next) => {
   restaurant.deleviryTime = deleviryTime || restaurant.deleviryTime;
   restaurant.topDish = topDish || restaurant.topDish;
   restaurant.offer = offer || restaurant.offer;
+  restaurant.tags = tags || restaurant.tags;
 
   try {
     await restaurant.save();
