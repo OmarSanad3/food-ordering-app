@@ -1,8 +1,9 @@
 import Card from "../../components/Card/Card";
 import SideBar from "../../components/SideBar/SideBar";
 import { Link } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext, useState , useCallback  } from "react";
 import { AppContext } from "../../context/AppContext";
+
 const cardArray = [
   {
     id: 1,
@@ -81,10 +82,9 @@ function RestaurantPage() {
 
   const [selectedOption, setSelectedOption] = useState("Popular");
   const [selectedDish, setSelectedDish] = useState("All");
-
   const [sortedCards, setSortedCards] = useState(cardArray);
 
-  const handleSortChange = (option) => {
+  const handleSortChange = useCallback((option) => {
     setSelectedOption(option);
     let sortedArray = [...cardArray];
     if (option === "Rating") {
@@ -95,11 +95,11 @@ function RestaurantPage() {
       sortedArray.sort((a, b) => b.reviews - a.reviews);
     }
     setSortedCards(sortedArray);
-  };
+  } , []);
 
-  const handleSelectedDish = (dish) => {
+  const handleSelectedDish = useCallback((dish) => {
     setSelectedDish(dish);
-  };
+  }, []);
 
   const filterCards = (cards, selectedDish, search) => {
     return cards.filter((item) => {
@@ -138,7 +138,9 @@ function RestaurantPage() {
             <h1>No Restaurants Found</h1>
           )}
         </div>
-        <button className="btn btn-warning mt-5 w-100">Load More</button>
+        {filteredCards.length > 0 && (
+          <button className="btn btn-warning mt-5 w-100">Load More</button>
+        )}
       </div>
     </div>
   );
