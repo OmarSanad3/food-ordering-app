@@ -1,22 +1,44 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext ,useState } from "react";
 import { AppContext } from "../../context/AppContext";
 import styles from "./Header.module.css";
 import logo from "../../images/Screenshot_2024-10-17_183239-removebg-preview.webp";
+import axios from "axios";
+import Loader from "../Loader/Loader";
 
 function Header() {
-  
-  const { mytoken,setToken, inHomePage, setSearch} =
-    useContext(AppContext);
- 
-    const navigate=useNavigate()
-    function logOut(){
-      setToken(null)
-      localStorage.removeItem("tkn")
-      navigate("/login")
-
+  const { mytoken, setToken, inHomePage, setSearch } = useContext(AppContext);
+   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  function logOut() {
+    setToken(null);
+    localStorage.removeItem("tkn");
+    navigate("/login");
   }
-    
+
+  const handleCitySelect = async (city) => {
+    console.log(city);
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        `http://localhost:3000/restaurants/${city}`
+      );
+      if (response.data) {
+        navigate(`/restaurants/${city}`);
+      } else {
+        console.log("Restaurant not found");
+      }
+    } catch (error) {
+      console.error("Error fetching restaurant data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if(loading){
+    return <Loader/>
+  }
+
   const SignInAndLogin = (
     <>
       <li className="nav-item">
@@ -57,9 +79,6 @@ function Header() {
           aria-label="Search"
           onChange={(e) => setSearch(e.target.value)}
         />
-        {/* <button className="btn btn-outline-warning" type="submit">
-          Search
-        </button> */}
       </form>
       <li className="nav-item dropdown">
         <Link
@@ -73,24 +92,38 @@ function Header() {
         </Link>
         <ul className="dropdown-menu">
           <li className="nav-item">
-            <Link className="dropdown-item" to="#">
+            <Link
+              className="dropdown-item"
+              to="#"
+              onClick={() => handleCitySelect("Port-Said")}
+            >
               Portsaid
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="dropdown-item" to="#">
+            <Link
+              className="dropdown-item"
+              to="#"
+              onClick={() => handleCitySelect("Cairo")}
+            >
               Cairo
             </Link>
           </li>
           <li className="nav-item">
-          </li>
-          <li className="nav-item">
-            <Link className="dropdown-item" to="#">
+            <Link
+              className="dropdown-item"
+              to="#"
+              onClick={() => handleCitySelect("Alexandria")}
+            >
               Alexandria
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="dropdown-item" to="#">
+            <Link
+              className="dropdown-item"
+              to="#"
+              onClick={() => handleCitySelect("Elmansoura")}
+            >
               Elmansoura
             </Link>
           </li>
@@ -104,7 +137,7 @@ function Header() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/"role="button" onClick={logOut}>
+            <Link className="nav-link" to="/" role="button" onClick={logOut}>
               Logout
             </Link>
           </li>

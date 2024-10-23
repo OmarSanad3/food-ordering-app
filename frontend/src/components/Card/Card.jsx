@@ -1,14 +1,16 @@
 import styles from "./Card.module.css"; // Importing the CSS module
-import img from "../../assets/dish1.webp";
+// import img from "../../assets/dish1.webp";
 import StarRating from "../StarRating/StarRating";
 //  title stars reviews offer deliveryTime  location / there is image and price remaining
 function Card({
   title,
   stars,
   reviews,
-  offer = "Discount",
+  offer ,
   deliveryTime,
   location,
+  img,
+  price,
 }) {
   return (
     <div className={styles.cardContainer}>
@@ -19,7 +21,7 @@ function Card({
           className={styles.foodImage}
         />
         <div className={styles.priceTag}>
-          <span>173.68 EGP</span>
+          <span>{price} EGP</span>
         </div>
       </div>
       <div className={styles.detailsSection}>

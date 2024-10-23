@@ -1,19 +1,16 @@
 import styles from "./Menu.module.css";
-// import logo from "../../images/kfc-logo-editorial-free-vector.jpg";
 import Cart from "../../components/cart/Cart";
 import Order from "../../components/Order/Order";
-import { useEffect, useState } from "react";
 import Reviews from "../../components/Reviews/Reviews";
 import Info from "../../components/Info/Info";
+import { cartContext } from "../../context/AddToCartContext";
+import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { useContext } from "react";
-import { cartContext } from "../../context/AddToCartContext";
-
 
 export default function Menu() {
   const [selectedTab, setSelectedTab] = useState("menu");
-  const {addToCart}=useContext(cartContext)
+  // const {addToCart}=useContext(cartContext)
   const [productsDetails, setproductsDetails] = useState([]);
   const { id } = useParams();
 
@@ -28,12 +25,8 @@ export default function Menu() {
   }
 
   useEffect(() => {
-
-    getProductsDetails()
-    
-  }, [])
-  
-
+    getProductsDetails();
+  }, []);
 
   return (
     <>
@@ -43,9 +36,9 @@ export default function Menu() {
             <div className="col-sm-8 me-auto">
               <div className="row">
                 <div className="col-sm-2">
-                  <img className="img-fluid" src="" width={120} height={150} />
+                  <img src = {productsDetails.logo} className="img-fluid"  width={120} height={150} />
                 </div>
-                <div className="col-sm-4 ">
+                <div className="col-sm-5 ">
                   <div className="title fs-2 mb-2">{productsDetails.name}</div>
                   <div className="adress text-black-50 mb-1">
                     {productsDetails.location}
@@ -118,13 +111,13 @@ export default function Menu() {
           <div className={`row ${styles.row3} pt-md-3`}>
             {selectedTab === "menu" ? (
               <div className="col-md-12 col-lg-9">
-
                 {productsDetails.menu &&
                   Array.isArray(productsDetails.menu) &&
                   productsDetails.menu.map((meal) => {
                     return (
                       <Order
                         key={meal._id}
+                        meadId={meal._id}
                         title={meal.title}
                         image={meal.image}
                         description={meal.description}
@@ -150,8 +143,8 @@ export default function Menu() {
             ) : (
               <Info
                 name={productsDetails.name}
-                cheapestMealPrice={productsDetails.cheapestMealPrice}
-                deliveryTime={productsDetails.deliveryTime}
+                cheapestMealPrice={productsDetails.cheapestMeal}
+                deliveryTime={productsDetails.deleviryTime}
                 stars={productsDetails.stars}
                 tags={productsDetails.tags}
               />
