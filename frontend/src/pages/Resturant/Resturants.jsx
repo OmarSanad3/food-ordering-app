@@ -3,7 +3,7 @@ import SideBar from "../../components/SideBar/SideBar";
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AppContext } from "../../context/AppContext";
-const cardArray = [
+const restaurantCardArray = [
   {
     id: 1,
     title: "Bufflo",
@@ -82,11 +82,11 @@ function RestaurantPage() {
   const [selectedOption, setSelectedOption] = useState("Popular");
   const [selectedDish, setSelectedDish] = useState("All");
 
-  const [sortedCards, setSortedCards] = useState(cardArray);
+  const [sortedCards, setSortedCards] = useState(restaurantCardArray);
 
   const handleSortChange = (option) => {
     setSelectedOption(option);
-    let sortedArray = [...cardArray];
+    let sortedArray = [...restaurantCardArray];
     if (option === "Rating") {
       sortedArray.sort((a, b) => b.stars - a.stars);
     } else if (option === "Delivery") {
@@ -113,11 +113,29 @@ function RestaurantPage() {
 
   const filteredCards = filterCards(sortedCards, selectedDish, search);
 
+
+  // const [products, setproducts] = useState(null)
+  // async function getProducts(){
+  //   await axios.get(`https://ecommerce.routemisr.com/api/v1/products`).then((res)=>{
+  //     setproducts(res.data.data)
+  //     console.log(res.data.data);
+      
+  //   }).catch((err)=>{
+  //     console.log(err);
+      
+  //   })
+  // }
+  // useEffect(() => {
+  //   getProducts()
+    
+  // }, [])
+  
   return (
     <div className="row restaurant-page mt-5">
       <div className="col-2">
         <SideBar
           selectedOption={selectedOption}
+          selectedDish={selectedDish}
           handleSortChange={handleSortChange}
           handleSelectDish={handleSelectedDish}
         />
@@ -125,14 +143,17 @@ function RestaurantPage() {
 
       <div className="container text-center col-md-10 col-sm-12">
         <div className="row g-4 ">
-          { filteredCards.length > 0 ? filteredCards.map((card) => (
-              <div className="col" key={card.id}>
-                <Link to={`/menu/${card.id}`}>
-                  <Card {...card} />
+          {filteredCards.length > 0 ? (
+            filteredCards.map((restaurant) => (
+              <div className="col" key={restaurant.id}>
+                <Link to={`/menu/${restaurant.id}`}>
+                  <Card {...restaurant} />
                 </Link>
               </div>
-            )): <h1>No Restaurants Found</h1>
-          }
+            ))
+          ) : (
+            <h1>No Restaurants Found</h1>
+          )}
         </div>
         <button className="btn btn-warning mt-5 w-100">Load More</button>
       </div>
