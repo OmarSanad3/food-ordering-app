@@ -10,6 +10,7 @@ module.exports.addRestaurant = async (req, res, next) => {
     cheapestMeal,
     deleviryTime,
     topDish,
+    offer,
   } = req.body;
 
   const restaurant = new Restaurant({
@@ -20,6 +21,7 @@ module.exports.addRestaurant = async (req, res, next) => {
     cheapestMeal,
     deleviryTime,
     topDish,
+    offer,
   });
 
   try {

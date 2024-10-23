@@ -4,12 +4,11 @@ const bodyParser = require("body-parser");
 
 const dotenv = require("dotenv");
 
-const userRoute = require("./routes/user.routes");
-
 dotenv.config({ path: "./config.env" });
 
 const adminRoutes = require("./routes/admin.routes");
 const restaurantRoutes = require("./routes/restaurant.routes");
+const userRoute = require("./routes/user.routes");
 
 const DB_URI = process.env.DB_URI;
 
@@ -32,8 +31,6 @@ app.use(restaurantRoutes);
 app.use("/admin", adminRoutes);
 
 app.use((error, req, res, next) => {
-  console.error("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
-
   const status = error.statusCode || 500;
   const message = error.message;
   const data = error.data;
