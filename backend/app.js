@@ -46,3 +46,14 @@ mongoose
     });
   })
   .catch();
+
+
+/* 
+
+  fetch in js
+
+  await fetch("await fetch("localhost:3000/restaurants").
+    (res => res.json()).
+    (restaurants => setSortedCards(restaurants)).catch(err => console.log(err));
+
+*/

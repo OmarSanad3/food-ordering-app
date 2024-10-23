@@ -67,3 +67,38 @@ module.exports.addMeal = async (req, res, next) => {
     res.status(500).json({ error });
   }
 };
+
+
+module.exports.editRestaurant = async (req, res, next) => {
+  const { restaurantId } = req.params;
+
+  const {
+    name,
+    logo,
+    location,
+    smallDescription,
+    cheapestMeal,
+    deleviryTime,
+    topDish,
+    offer,
+  } = req.body;
+
+  const restaurant = await Restaurant.findById(restaurantId);
+
+  restaurant.name = name || restaurant.name;
+  restaurant.logo = logo || restaurant.logo;
+  restaurant.location = location || restaurant.location;
+  restaurant.smallDescription = smallDescription || restaurant.smallDescription;
+  restaurant.cheapestMeal = cheapestMeal || restaurant.cheapestMeal;
+  restaurant.deleviryTime = deleviryTime || restaurant.deleviryTime;
+  restaurant.topDish = topDish || restaurant.topDish;
+  restaurant.offer = offer || restaurant.offer;
+
+  try {
+    await restaurant.save();
+    restaurant._id = restaurant._id.toString();
+    res.status(201).json({ restaurant });
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+}

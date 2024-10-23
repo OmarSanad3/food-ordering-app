@@ -12,6 +12,6 @@ router.post("/add-meal/:restaurantId", adminController.addMeal);
 
 // router.post('/add-meal', adminController.addMeal);
 
-// router.post('/edit-restaurant');
+router.post("/edit-restaurant/:restaurantId", adminController.editRestaurant);
 
 module.exports = router;
