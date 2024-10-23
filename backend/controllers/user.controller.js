@@ -12,6 +12,16 @@ const Review = require("../models/review.model");
 
 
 exports.login = async (req, res, next) => {
+
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    const e = errors.array();
+    const error = new Error(e[0].msg);
+    error.statusCode = 422;
+    return next(error);
+  }
+
   const { email, password } = req.body;
 
   try {

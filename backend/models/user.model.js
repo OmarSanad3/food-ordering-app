@@ -13,11 +13,11 @@ const userSchema = new Schema({
     {
       mealId: { type: Schema.Types.ObjectId, ref: "Meal" },
       quantity: { type: Number },
-      // totalPrice: { type: Number }
-    },
+      totalPrice: { type: Number }
+    }
   ],
   orders: [{ type: Schema.Types.ObjectId, ref: "Order" }]
-});
+})
 
 userSchema.methods.addToCart = function (meal) {
   const cartMealIndex = this.cart.findIndex((m) => {
@@ -26,10 +26,9 @@ userSchema.methods.addToCart = function (meal) {
 
   if (cartMealIndex >= 0) {
     this.cart[cartMealIndex].quantity++;
-    // this.cart[cartMealIndex].totalPrice += meal.price;
+    this.cart[cartMealIndex].totalPrice += +meal.price;
   } else {
-    this.cart.push({ mealId: meal._id, quantity: 1 });
-    // this.cart.push({ mealId: meal._id, quantity: 1, totalPrice: meal.price });
+    this.cart.push({ mealId: meal._id, quantity: 1, totalPrice: +meal.price });
   }
 
   return this.save();
