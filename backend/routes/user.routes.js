@@ -41,13 +41,19 @@ router.get("/orders", isAuth, userController.getOrders);
 
 // router.get('/checkout', isAuth, userController.getCheckout);
 
+router.post("/add-review", isAuth, userController.addReview);
+
 router.post("/login", userController.login);
 
 router.post("/add-to-cart", isAuth, userController.addToCart);
 
 router.post("/order", isAuth, userController.addOrder);
 
-router.delete("/remove-from-cart/:mealId", isAuth, userController.removeFromCart);
+router.delete(
+  "/remove-from-cart/:mealId",
+  isAuth,
+  userController.removeFromCart
+);
 
 router.delete("/clear-cart", isAuth, userController.clearCart);
 
