@@ -127,7 +127,7 @@ function RestaurantPage() {
         <div className="row g-4 ">
           { filteredCards.length > 0 ? filteredCards.map((card) => (
               <div className="col" key={card.id}>
-                <Link to="menu">
+                <Link to={`/menu/${card.id}`}>
                   <Card {...card} />
                 </Link>
               </div>

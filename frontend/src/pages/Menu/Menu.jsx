@@ -2,12 +2,31 @@ import styles from "./Menu.module.css";
 // import logo from "../../images/kfc-logo-editorial-free-vector.jpg";
 import Cart from "../../components/cart/Cart";
 import Order from "../../components/Order/Order";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Reviews from "../../components/Reviews/Reviews";
 import Info from "../../components/Info/Info";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 export default function Menu() {
   const [selectedTab, setSelectedTab] = useState("menu");
+  const [productsDetails, setproductsDetails] = useState(null)
+  const{id}=useParams()
+  
+ async function getProductsDetails(){
+    await axios.get(`https://ecommerce.routemisr.com/api/v1/products/6428ebc6dc1175abc65ca0b9`).then((res)=>{
+      setproductsDetails(res.data.data)
+      console.log(res.data.data);
+      
+    }).catch((err)=>{
+      console.log(err);
+      
+    })
+  }
+  useEffect(() => {
+    getProductsDetails()
+    
+  }, [])
   
   return (
     <>
@@ -19,13 +38,13 @@ export default function Menu() {
                 <div className="col-sm-2">
                   <img
                     className="img-fluid"
-                    src="https://images.deliveryhero.io/image/talabat/restaurants/New_Project_-_2020-1_637382995109103333.jpg?width=180"
+                    src={productsDetails.imageCover}
                     width={120}
                     height={150}
                   />
                 </div>
                 <div className="col-sm-4 ">
-                  <div className="title fs-2 mb-2">Crep Town</div>
+                  <div className="title fs-2 mb-2">{productsDetails.title}</div>
                   <div className="adress text-black-50 mb-1">
                     in Tarh-elbahr
                   </div>
