@@ -13,25 +13,27 @@ import { cartContext } from "../../context/AddToCartContext";
 
 export default function Menu() {
   const [selectedTab, setSelectedTab] = useState("menu");
-  const [productsDetails, setproductsDetails] = useState(null)
   const {addToCart}=useContext(cartContext)
-  const{id}=useParams()
+  const [productsDetails, setproductsDetails] = useState([]);
+  const { id } = useParams();
 
- async function getProductsDetails(){
-    await axios.get(`https://ecommerce.routemisr.com/api/v1/products/${id}`).then((res)=>{
-      setproductsDetails(res.data.data)
-      console.log(res.data.data);
-      
-    }).catch((err)=>{
+  async function getProductsDetails() {
+    try {
+      const res = await axios.get(`http://localhost:3000/restaurant/${id}`);
+      setproductsDetails(res.data.restaurant);
+      console.log(res.data.restaurant);
+    } catch (err) {
       console.log(err);
-      
-    })
+    }
   }
+
   useEffect(() => {
+
     getProductsDetails()
     
   }, [])
   
+
 
   return (
     <>
@@ -41,20 +43,15 @@ export default function Menu() {
             <div className="col-sm-8 me-auto">
               <div className="row">
                 <div className="col-sm-2">
-                  <img
-                    className="img-fluid"
-                    src=""
-                    width={120}
-                    height={150}
-                  />
+                  <img className="img-fluid" src="" width={120} height={150} />
                 </div>
                 <div className="col-sm-4 ">
-                  <div className="title fs-2 mb-2">{DATA_OBJECT.name}</div>
+                  <div className="title fs-2 mb-2">{productsDetails.name}</div>
                   <div className="adress text-black-50 mb-1">
-                    {DATA_OBJECT.location}
+                    {productsDetails.location}
                   </div>
                   <div className="describtion text-black-50 mb-1">
-                    {DATA_OBJECT.smallDescription}
+                    {productsDetails.smallDescription}
                   </div>
                 </div>
               </div>
@@ -121,17 +118,20 @@ export default function Menu() {
           <div className={`row ${styles.row3} pt-md-3`}>
             {selectedTab === "menu" ? (
               <div className="col-md-12 col-lg-9">
-                {productsDetails.menu.map((meal) => {
-                  return (
-                    <Order
-                      key={meal._id}
-                      title={meal.title}
-                      image={meal.image}
-                      description={meal.description}
-                      price={meal.price}
-                    />
-                  );
-                })}
+
+                {productsDetails.menu &&
+                  Array.isArray(productsDetails.menu) &&
+                  productsDetails.menu.map((meal) => {
+                    return (
+                      <Order
+                        key={meal._id}
+                        title={meal.title}
+                        image={meal.image}
+                        description={meal.description}
+                        price={meal.price}
+                      />
+                    );
+                  })}
               </div>
             ) : selectedTab === "reviews" ? (
               <div className="col-md-12 col-lg-9">
