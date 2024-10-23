@@ -12,17 +12,19 @@ function RestaurantPage() {
   const [selectedOption, setSelectedOption] = useState("Popular");
   const [selectedDish, setSelectedDish] = useState("All");
   const [sortedCards, setSortedCards] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   async function getProducts() {
-    await axios
-      .get(`http://localhost:3000/restaurants`)
-      .then((res) => {
-        setSortedCards(res.data.restaurants);
-        console.log(res.data.restaurants);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    setLoading(true);
+    try {
+      const res = await axios.get(`http://localhost:3000/restaurants`);
+      setSortedCards(res.data.restaurants);
+      console.log(res.data.restaurants);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
   }
   useEffect(() => {
     getProducts();
@@ -62,6 +64,10 @@ function RestaurantPage() {
 
   const filteredCards = filterCards(sortedCards, selectedDish, search);
 
+  if(loading){
+    return <Loader/>
+  }
+  
   return (
     <div className="row restaurant-page mt-5">
       <div className="col-2">
@@ -90,7 +96,7 @@ function RestaurantPage() {
               </div>
             ))
           ) : (
-            <Loader />
+            <h1>No Restaurants Found</h1>
           )}
         </div>
         {filteredCards.length > 0 && (

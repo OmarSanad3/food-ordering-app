@@ -4,12 +4,12 @@ import { useContext, useEffect } from "react";
 import img from "../../assets/dish1.webp";
 import { cartContext } from "../../context/AddToCartContext";
 
-export default function Order({ key,title, image, description, price}) {
-  const { addToCart } = useContext(cartContext);
+export default function Order({ mealId ,title, image, description, price}) {
+  // const { addToCart } = useContext(cartContext);
 
   function addProduct() {
-    addToCart(key);
-    console.log("Product added to cart:", key);
+    addToCart(mealId);
+    console.log("Product added to cart:", mealId);
   }
 
 
