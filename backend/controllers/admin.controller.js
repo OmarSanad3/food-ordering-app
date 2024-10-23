@@ -11,6 +11,7 @@ module.exports.addRestaurant = async (req, res, next) => {
     deleviryTime,
     topDish,
     offer,
+    rating,
   } = req.body;
 
   const restaurant = new Restaurant({
@@ -68,7 +69,6 @@ module.exports.addMeal = async (req, res, next) => {
   }
 };
 
-
 module.exports.editRestaurant = async (req, res, next) => {
   const { restaurantId } = req.params;
 
@@ -101,4 +101,4 @@ module.exports.editRestaurant = async (req, res, next) => {
   } catch (error) {
     res.status(500).json({ error });
   }
-}
+};
