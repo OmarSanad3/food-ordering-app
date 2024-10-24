@@ -35,6 +35,21 @@ router.post(
   userController.signup
 );
 
+router.post(
+  "/login", 
+  [
+    body("email")
+      .isEmail()
+      .withMessage("Please enter a valid email.")
+      .normalizeEmail(),
+    body("password")
+      .trim()
+      .isLength({ min: 5 })
+      .withMessage("Password must be at least 5 characters long.")
+  ],
+  userController.login
+);
+
 router.get("/cart", isAuth, userController.getCart);
 
 router.get("/orders", isAuth, userController.getOrders);
@@ -45,8 +60,6 @@ router.post("/login", userController.login);
 
 router.post("/add-to-cart", isAuth, userController.addToCart);
 
-router.post("/order", isAuth, userController.addOrder);
-
 router.delete(
   "/remove-from-cart/:mealId",
   isAuth,
@@ -55,4 +68,9 @@ router.delete(
 
 router.delete("/clear-cart", isAuth, userController.clearCart);
 
+router.get('/checkout', isAuth, userController.getCheckout);
+
 module.exports = router;
+
+// 4242 4242 4242
+// and data 999
