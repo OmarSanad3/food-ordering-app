@@ -1,20 +1,48 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import img from "../../assets/dish1.webp";
 import { cartContext } from "../../context/AddToCartContext";
 import toast from "react-hot-toast";
+import axios from "axios";
+
 
 export default function Order({ mealId, title, image, description, price }) {
-  const { addToCart, decreamentFromCart, deleteCart } = useContext(cartContext);
+  const { addToCart} = useContext(cartContext);
+  const [items, setItems] = useState([]);
+  
 
   function addProduct() {
     addToCart(mealId);
     console.log("Product added to cart:", mealId);
   }
-  function deleteProduct() {
-    decreamentFromCart(mealId);
-    console.log("Product deleted from cart:", mealId);
+  async function getCartItems() {
+    try {
+      const res = await axios.get("http://localhost:3000/cart", {
+        headers: { Authorization: localStorage.getItem("tkn") },
+      });
+      setItems(res.data.cart);
+      console.log("Cart items:", res.data.cart);
+    } catch (e) {
+      if (e.response && e.response.status === 409) {
+        console.log(e.response.data);
+        setItems([]);
+      } else {
+        console.log("Error fetching cart data", e);
+      }
+    }
   }
+  const updateQuantity = (id, delta) => {
+    setItems((prevItems) =>
+      prevItems.map((item) =>
+        item.mealId._id === id
+          ? { ...item, quantity: item.quantity + delta }
+          : item
+      )
+    );
+  };
+  useEffect(() => {
+    getCartItems();
+  }, []);
 
   return (
     <>
@@ -33,7 +61,12 @@ export default function Order({ mealId, title, image, description, price }) {
           <div style={{ maxWidth: "100%" }}>EGP {price}</div>
           <i
             className="bi bi-plus-circle-fill text-warning cursor-pointer"
-            onClick={() => addProduct()}
+            onClick={() => 
+              
+              {addProduct() 
+                updateQuantity(mealId,1)
+              
+            }}
           ></i>
         </div>
       </div>

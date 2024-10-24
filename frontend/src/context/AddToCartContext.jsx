@@ -1,12 +1,14 @@
 import axios from "axios";
-import { createContext } from "react";
-import React from "react";
+import { createContext} from "react";
 import toast from "react-hot-toast";
 
 export const cartContext = createContext();
 export default function CartContextProvider({ children }) {
+  
+  
 
   function addToCart(id) {
+  
     axios
       .post(
         "http://localhost:3000/add-to-cart",
@@ -19,6 +21,7 @@ export default function CartContextProvider({ children }) {
       )
       .then((res) => {
         console.log("res", res);
+       
         toast.success("item is added to cart", {
           duration: 1500,
           position: "top-center",
@@ -41,6 +44,7 @@ export default function CartContextProvider({ children }) {
         }
       )
       .then((res) => {
+      
         console.log("res", res);
         toast.success("item is deleted from cart", {
           duration: 1500,
@@ -67,6 +71,7 @@ export default function CartContextProvider({ children }) {
         console.log("err", err);
       });
   }
+  
 
   return (
     <cartContext.Provider
@@ -74,6 +79,7 @@ export default function CartContextProvider({ children }) {
         addToCart,
         decreamentFromCart,
         deleteCart,
+      
       }}
     >
       {" "}
