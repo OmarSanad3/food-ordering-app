@@ -44,7 +44,7 @@ export default function Home() {
               <input
                 className={`form-control`}
                 type="search"
-                placeholder="Search"
+                placeholder="Find a retaurant"
                 aria-label="Search"
               />
             </form>

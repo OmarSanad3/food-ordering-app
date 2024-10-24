@@ -1,5 +1,5 @@
 import StarRating from "../StarRating/StarRating";
-export default function Reviews({stars = 4.5 , username = "zyad elanghy" , feedback = "very cool" , date = "14 july 2021"}) {
+export default function Reviews({stars = 4.5 , username , feedback = "very cool" , date = "14 july 2021"}) {
   return (
     <>
       <div className="col-md-12 ">
@@ -8,7 +8,7 @@ export default function Reviews({stars = 4.5 , username = "zyad elanghy" , feedb
             <div className="stars" style={{ maxWidth: "50%" }}>
               <StarRating stars={stars} />
             </div>
-            <small className="text-black-50 text-end ">{date}</small>
+            <small className="text-black-50 text-end ">{date === "Date not available" ? "14 july 2021" : date}</small>
           </div>
         </div>
         <div className="d-flex align-items-center w-100">

@@ -128,14 +128,17 @@ export default function Menu() {
               <div className="col-md-12 col-lg-9">
                 {productsDetails.reviews &&
                   productsDetails.reviews.map((review, index) => {
-                    const formattedDate = review.date ? review.date.toDateString() : "Date not available"; // Safe date formatting
+                    const formattedDate = review.createdAt 
+                    ? new Date(review.updatedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) 
+                    : "Date not available"; 
+                    console.log("review.date ",formattedDate);
                     return (
                       <Reviews
                         key={index}
                         stars={review.stars}
-                        username={review.username}
+                        username={review.user}
                         feedback={review.feedback}
-                        date={formattedDate} // Use the formatted date
+                        date={formattedDate} 
                       />
                     );
                   })}
