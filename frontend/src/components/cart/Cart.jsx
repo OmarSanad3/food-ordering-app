@@ -27,8 +27,7 @@ export default function Cart() {
     let total=0
     for (let i = 0; i < items.length; i++) {
         total+=items[i].quantity*items[i].mealId.price
-        
-      
+
     }
     return total
   };
@@ -46,7 +45,9 @@ export default function Cart() {
         <div className="card-body">
           <ul className="list-group list-group-flush">
             {items.length > 0 ? (
-              items.map((item) => (
+              
+              items.map((item) => 
+                (
                 <li
                   key={item._id}
                   className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0"
@@ -80,29 +81,33 @@ export default function Cart() {
                   <span>${item.quantity * item.mealId.price}</span>
                 </li>
               ))
-            ) : (
+              
+              ) : (
               <li className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
                 <span>Your cart is empty</span>
               </li>
             )}
-
             {items.length > 0 && (
+              <>
               <li className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
                 <div>
                   <strong>Total amount</strong>
                   <p className="mb-0">${calculateTotal()}</p>
                 </div>
-              </li>
+             
+               </li>
+                 <button
+                 type="button"
+                 className="btn btn-primary bg-warning btn-lg btn-block"
+                 onClick={() => navigate("/userinfo")}
+               >
+                 Go to checkout
+               </button>
+               </>
             )}
           </ul>
 
-          <button
-            type="button"
-            className="btn btn-primary bg-warning btn-lg btn-block"
-            onClick={() => navigate("/userinfo")}
-          >
-            Go to checkout
-          </button>
+         
         </div>
       </div>
     </div>
