@@ -111,7 +111,7 @@ module.exports.editMeal = async (req, res, next) => {
 
   try {
     await meal.save();
-    res.status(201).json({ meal });
+    res.status(201).json({ message: "Meal updated successfully", meal });
   } catch (error) {
     res.status(500).json({ error });
   }
