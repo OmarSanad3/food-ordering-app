@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 
 export const cartContext = createContext();
 export default function CartContextProvider({ children }) {
+  
 
   function addToCart(id) {
     axios

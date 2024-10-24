@@ -5,8 +5,10 @@ import { cartContext } from "../../context/AddToCartContext";
 
 export default function Cart() {
   const [items, setItems] = useState([]);
+  
   const navigate = useNavigate();
-  const { addToCart, decreamentFromCart } = useContext(cartContext); 
+  const { addToCart, decreamentFromCart } = useContext(cartContext);
+
   async function getCartItems() {
     try {
       const res = await axios.get("http://localhost:3000/cart", {
@@ -58,6 +60,15 @@ export default function Cart() {
                     <button
                       onClick={() => {
                         if (item.quantity > 1) {
+                          setItems((prevItems) => {
+                            return prevItems.map((prevItem) => {
+                              if (prevItem.mealId._id === item.mealId._id) {
+                                return { ...prevItem, quantity: prevItem.quantity - 1 };
+                              }
+                              return prevItem;
+                            });
+                          });
+                          
                           decreamentFromCart(item.mealId._id);
                         }
                       }}
@@ -71,7 +82,18 @@ export default function Cart() {
 
           
                     <button
-                      onClick={() => addToCart(item.mealId._id)}
+                      onClick={() => {
+                        setItems((prevItems) => {
+                          return prevItems.map((prevItem) => {
+                            if (prevItem.mealId._id === item.mealId._id) {
+                              return { ...prevItem, quantity: prevItem.quantity + 1 };
+                            }
+                            return prevItem;
+                          });
+                        });
+                        
+                        addToCart(item.mealId._id);
+                      }}
                       className="btn btn-light btn-sm"
                     >
                       <i className="fa-solid fa-plus"></i>
