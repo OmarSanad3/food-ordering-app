@@ -7,10 +7,10 @@ export const cartContext=createContext();
 export default function CartContextProvider({children}) {
 
     function addToCart(id){
-        axios.post("`http://localhost:3000/add-to-cart",{
+        axios.post("http://localhost:3000/add-to-cart",{
             "mealId": id
         },{
-            headers:{token:localStorage.getItem("tkn")}
+            headers:{Authorization:localStorage.getItem("tkn")}
         }).then((res)=>{
             console.log("res",res);
             toast.success('item is added to cart',{duration:1500, position: "top-center"})
@@ -27,7 +27,7 @@ export default function CartContextProvider({children}) {
         axios.delete(`http://localhost:3000/remove-from-cart/${id}`,{
             
         },{
-            headers:{token:localStorage.getItem("tkn")}
+            headers:{Authorization:localStorage.getItem("tkn")}
         }).then((res)=>{
             console.log("res",res);
             
@@ -38,7 +38,7 @@ export default function CartContextProvider({children}) {
     }
     function deleteCart(){
         axios.delete(`http://localhost:3000/clear-cart`,{
-            headers:{token:localStorage.getItem("tkn")}
+            headers:{Authorization:localStorage.getItem("tkn")}
         }).then((res)=>{
             console.log("res",res);
             

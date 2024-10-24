@@ -28,16 +28,16 @@ export default function Register() {
       .required("Name is Required")
       .min(3, "must be more than 3 chars")
       .max(10, "must be less than 10"),
-    phone: yup
+    phoneNumber: yup
       .string()
-      .required("phone is required")
+      .required("phoneNumber is required")
       .length(11, "must be 11 digit"),
     email: yup
       .string()
       .required("email is required")
       .email("enter avalid email"),
     password: yup.string().required("password is required").min(6).max(12),
-    rePassword: yup
+    confirmPassword: yup
       .string()
       .required("Repassword is required")
       .oneOf([yup.ref("password")], "Passwords must match"),
@@ -47,8 +47,9 @@ export default function Register() {
     firstName: "",
     lastName: "",
     email: "",
-    phone:"",
-    password: ""
+    phoneNumber:"",
+    password: "",
+    confirmPassword:""
   };
   async function sendUserData(values) {
     setIsLoading(true);
@@ -60,13 +61,14 @@ export default function Register() {
       localStorage.setItem("tkn",res.data.token)
       setToken(res.data.token)
       console.log("res",res);
-      
       setisPost(true);
       seterrMessage(undefined);
       setTimeout(function () {
         navigate("/restaurant");
       }, 1000);
     } catch (e) {
+      console.log(e);
+      
       if (e.response && e.response.status === 422) {
         seterrMessage(e.response.data.data[0].msg); // Conflict: User already exists
         setisPost(false);
@@ -143,14 +145,14 @@ export default function Register() {
         <input
           onChange={myFormik.handleChange}
           onBlur={myFormik.handleBlur}
-          value={myFormik.values.phone}
+          value={myFormik.values.phoneNumber}
           type="text"
-          id="phone"
-          placeholder="Enter your phone number"
+          id="phoneNumber"
+          placeholder="Enter your phoneNumber number"
           className="form-control mb-4"
         />
-        {myFormik.errors.phone && myFormik.touched.phone && (
-          <div className="alert alert-danger">{myFormik.errors.phone}</div>
+        {myFormik.errors.phoneNumber && myFormik.touched.phoneNumber && (
+          <div className="alert alert-danger">{myFormik.errors.phoneNumber}</div>
         )}
 
         <input
@@ -169,14 +171,14 @@ export default function Register() {
         <input
           onChange={myFormik.handleChange}
           onBlur={myFormik.handleBlur}
-          value={myFormik.values.rePassword}
+          value={myFormik.values.confirmPassword}
           type="password"
-          id="rePassword"
+          id="confirmPassword"
           placeholder="Re-enter your password"
           className="form-control mb-4"
         />
-        {myFormik.errors.rePassword && myFormik.touched.rePassword && (
-          <div className="alert alert-danger">{myFormik.errors.rePassword}</div>
+        {myFormik.errors.confirmPassword && myFormik.touched.confirmPassword && (
+          <div className="alert alert-danger">{myFormik.errors.confirmPassword}</div>
         )}
 
         <button

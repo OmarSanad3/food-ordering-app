@@ -33,10 +33,10 @@ export default function Order({ mealId,title, image, description, price}) {
             className="bi bi-plus-circle-fill text-warning"
             onClick={() => addProduct()}
           ></i>
-          <i
-            className="bi bi-minus-circle-fill text-warning"
-            onClick={() => deleteProduct()}
-          ></i>
+          
+
+          
+          
         </div>
       </div>
       <hr className="m-0" />
