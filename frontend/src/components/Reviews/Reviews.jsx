@@ -1,5 +1,5 @@
 import StarRating from "../StarRating/StarRating";
-export default function Reviews({stars = 4.5 , username = "zyad elanghy" , feedback = "very cool" , date = "14 july 2021"}) {
+export default function Reviews({stars = 4.5 , username , feedback = "very cool" , date = "14 july 2021"}) {
   return (
     <>
       <div className="col-md-12 ">
