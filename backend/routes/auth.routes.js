@@ -2,7 +2,7 @@ const express = require("express");
 const { body } = require("express-validator");
 
 const User = require("../models/user.model");
-const userController = require("../controllers/user.controller");
+const userController = require("../controllers/auth.controller");
 const isAuth = require("../middleware/is-auth");
 
 const router = express.Router();
@@ -50,27 +50,4 @@ router.post(
   userController.login
 );
 
-router.get("/cart", isAuth, userController.getCart);
-
-router.get("/orders", isAuth, userController.getOrders);
-
-// router.get('/checkout', isAuth, userController.getCheckout);
-
-router.post("/login", userController.login);
-
-router.post("/add-to-cart", isAuth, userController.addToCart);
-
-router.delete(
-  "/remove-from-cart/:mealId",
-  isAuth,
-  userController.removeFromCart
-);
-
-router.delete("/clear-cart", isAuth, userController.clearCart);
-
-router.get('/checkout', isAuth, userController.getCheckout);
-
 module.exports = router;
-
-// 4242 4242 4242
-// and data 999
