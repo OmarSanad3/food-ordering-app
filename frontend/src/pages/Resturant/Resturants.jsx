@@ -92,7 +92,7 @@ function RestaurantPage() {
                     reviews={restaurant.rating.reviewsCount}
                     deliveryTime={restaurant.deleviryTime}
                     location={restaurant.location}
-                    offer = {restaurant.offer}
+                    offer={restaurant.offer}
                     img={restaurant.topDish.image}
                     price={restaurant.topDish.price}
                   />
