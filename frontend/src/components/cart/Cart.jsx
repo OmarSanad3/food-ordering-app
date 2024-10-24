@@ -7,7 +7,7 @@ export default function Cart() {
   const [items, setItems] = useState([]);
 
   const navigate = useNavigate();
-  const {addToCart, decreamentFromCart } = useContext(cartContext);
+  const { addToCart, decreamentFromCart } = useContext(cartContext);
   async function getCartItems() {
     try {
       const res = await axios.get("http://localhost:3000/cart", {
@@ -65,11 +65,8 @@ export default function Cart() {
                     <button
                       onClick={() => {
                         if (item.quantity > 0) {
-                        
                           decreamentFromCart(item.mealId._id);
-                          updateQuantity(item.mealId._id, -1)
-                          
-                        
+                          updateQuantity(item.mealId._id, -1);
                         }
                       }}
                       className="btn btn-light btn-sm"
@@ -81,9 +78,8 @@ export default function Cart() {
 
                     <button
                       onClick={() => {
-            
-                        addToCart(item.mealId._id); 
-                        updateQuantity(item.mealId._id,1)
+                        addToCart(item.mealId._id);
+                        updateQuantity(item.mealId._id, 1);
                       }}
                       className="btn btn-light btn-sm"
                     >
