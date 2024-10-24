@@ -6,14 +6,17 @@ const userSchema = new Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   email: { type: String, required: true },
+  phoneNumber: { type: String, required: true },
   password: { type: String, required: true },
+  confirmPassword: { type: String, required: true },
   cart: [
     {
       mealId: { type: Schema.Types.ObjectId, ref: "Meal" },
       quantity: { type: Number },
+      // totalPrice: { type: Number }
     },
   ],
-  orders: [{ type: Schema.Types.ObjectId, ref: "Order" }],
+  orders: [{ type: Schema.Types.ObjectId, ref: "Order" }]
 });
 
 userSchema.methods.addToCart = function (meal) {
@@ -23,8 +26,10 @@ userSchema.methods.addToCart = function (meal) {
 
   if (cartMealIndex >= 0) {
     this.cart[cartMealIndex].quantity++;
+    // this.cart[cartMealIndex].totalPrice += meal.price;
   } else {
     this.cart.push({ mealId: meal._id, quantity: 1 });
+    // this.cart.push({ mealId: meal._id, quantity: 1, totalPrice: meal.price });
   }
 
   return this.save();

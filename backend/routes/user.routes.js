@@ -23,6 +23,10 @@ router.post(
         return true;
       })
       .normalizeEmail(),
+    body("phoneNumber")
+      .trim()
+      .matches(/^01[0125][0-9]{8}$/)
+      .withMessage("Please enter a valid Egyptian phone number."),
     body("password")
       .trim()
       .isLength({ min: 5 })
@@ -43,7 +47,11 @@ router.post("/add-to-cart", isAuth, userController.addToCart);
 
 router.post("/order", isAuth, userController.addOrder);
 
-router.delete("/remove-from-cart/:mealId", isAuth, userController.removeFromCart);
+router.delete(
+  "/remove-from-cart/:mealId",
+  isAuth,
+  userController.removeFromCart
+);
 
 router.delete("/clear-cart", isAuth, userController.clearCart);
 
