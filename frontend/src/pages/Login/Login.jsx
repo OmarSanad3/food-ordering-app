@@ -42,16 +42,15 @@ export default function Login() {
       localStorage.setItem("tkn",res.data.token)
       seterrMessage(undefined);
       setTimeout(function () {
-        navigate("/restaurant");
+        navigate("/");
       }, 1000);
     } catch (e) {
-      if (e.response && e.response.status === 409) {
-        console.log(e.response.data.message);
-        seterrMessage(e.response.data.message);
+      if (e.response && e.response.status === 422) {
+        seterrMessage("This account is already exist"); 
         setisPost(false);
       } else {
         console.log("errorrrrr", e);
-        seterrMessage(e.response.data.response.data.msg);
+        seterrMessage(e);
       }
     }
     setIsLoading(false);

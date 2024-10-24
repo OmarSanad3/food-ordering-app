@@ -36,21 +36,28 @@ export default function CartContextProvider({ children }) {
     axios
       .delete(
         `http://localhost:3000/remove-from-cart/${id}`,
-        {},
         {
           headers: { Authorization: localStorage.getItem("tkn") },
         }
       )
       .then((res) => {
         console.log("res", res);
+        toast.success("item is deleted from cart", {
+          duration: 1500,
+          position: "top-center",
+        });
       })
       .catch((err) => {
         console.log("err", err);
+        toast.error("item failed to deleted from cart", {
+          duration: 1500,
+          position: "top-center",
+        });
       });
   }
   function deleteCart() {
     axios
-      .delete(`http://localhost:3000/clear-cart`, {
+      .delete("http://localhost:3000/clear-cart", {
         headers: { Authorization: localStorage.getItem("tkn") },
       })
       .then((res) => {

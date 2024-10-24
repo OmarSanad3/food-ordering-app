@@ -64,13 +64,13 @@ export default function Register() {
       setisPost(true);
       seterrMessage(undefined);
       setTimeout(function () {
-        navigate("/restaurant");
+        navigate("/");
       }, 1000);
     } catch (e) {
       console.log(e);
       
       if (e.response && e.response.status === 422) {
-        seterrMessage(e.response.data.data[0].msg); // Conflict: User already exists
+        seterrMessage("This account is already exist"); 
         setisPost(false);
       } else {
         console.log("error resons", e.response.data.data[0].msg);

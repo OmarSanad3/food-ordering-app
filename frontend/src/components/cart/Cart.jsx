@@ -1,33 +1,41 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { cartContext } from "../../context/AddToCartContext"; 
 
 export default function Cart() {
   const [items, setItems] = useState([]);
-  const [total, setTotal] = useState(0); 
   const navigate = useNavigate();
-
+  const { addToCart, decreamentFromCart } = useContext(cartContext); 
   async function getCartItems() {
     try {
-      const res = await axios.get("http://localhost:3000/cart",{
-        headers:{Authorization:localStorage.getItem("tkn")}});
-      setItems(res.data.cart[0].mealId);
-      console.log("in try ", res.data.cart);
+      const res = await axios.get("http://localhost:3000/cart", {
+        headers: { Authorization: localStorage.getItem("tkn") },
+      });
+      setItems(res.data.cart);
+      console.log("Cart items:", res.data.cart);
     } catch (e) {
       if (e.response && e.response.status === 409) {
         console.log(e.response.data);
         setItems([]);
       } else {
-        console.log("Error from displaying cart", e);
+        console.log("Error fetching cart data", e);
       }
     }
   }
+  const calculateTotal = () => {
+    let total=0
+    for (let i = 0; i < items.length; i++) {
+        total+=items[i].quantity*items[i].mealId.price
+        
+      
+    }
+    return total
+  };
 
   useEffect(() => {
     getCartItems();
   }, []);
-
-  console.log(items,items);
 
   return (
     <div className="col-md-12">
@@ -43,8 +51,33 @@ export default function Cart() {
                   key={item._id}
                   className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0"
                 >
-                  <span>{item.name}</span>
-                  <span>{item.quantity} ${item.price}</span>
+                  <span className="flex-grow-1">{item.mealId.name}</span>
+
+                  <div className="d-flex justify-content-center align-items-center mx-2">
+                    <button
+                      onClick={() => {
+                        if (item.quantity > 1) {
+                          decreamentFromCart(item.mealId._id);
+                        }
+                      }}
+                      className="btn btn-light btn-sm"
+                    >
+                      <i className="fa-solid fa-minus"></i>
+                    </button>
+
+                    
+                    <span className="mx-2">{item.quantity}</span>
+
+          
+                    <button
+                      onClick={() => addToCart(item.mealId._id)}
+                      className="btn btn-light btn-sm"
+                    >
+                      <i className="fa-solid fa-plus"></i>
+                    </button>
+                  </div>
+
+                  <span>${item.quantity * item.mealId.price}</span>
                 </li>
               ))
             ) : (
@@ -53,19 +86,14 @@ export default function Cart() {
               </li>
             )}
 
-            <li className="list-group-item d-flex justify-content-between align-items-center px-0">
-              Shipping
-              <span>Gratis</span>
-            </li>
-            <li className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
-              <div>
-                <strong>Total amount</strong>
-                <p className="mb-0">(including VAT)</p>
-              </div>
-              <span>
-                <strong>${total.toFixed(2)}</strong>
-              </span>
-            </li>
+            {items.length > 0 && (
+              <li className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                <div>
+                  <strong>Total amount</strong>
+                  <p className="mb-0">${calculateTotal()}</p>
+                </div>
+              </li>
+            )}
           </ul>
 
           <button
