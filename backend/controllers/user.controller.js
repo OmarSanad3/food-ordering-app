@@ -203,38 +203,6 @@ exports.getOrders = async (req, res, next) => {
   }
 };
 
-exports.addReview = async (req, res, next) => {
-  const userId = req.userId;
-  const { restaurantId, stars, feedback } = req.body;
-
-  const user = await User.findById(userId);
-
-  if (!user) {
-    return res.status(404).json({ message: "User not found" });
-  }
-
-  const restaurant = await Restaurant.findById(restaurantId);
-
-  if (!restaurant) {
-    return res.status(404).json({ message: "Restaurant not found" });
-  }
-
-  const review = new Review({
-    restaurant: restaurantId,
-    user: userId,
-    stars,
-    feedback,
-  });
-
-  await review.save();
-
-  restaurant.push(review._id);
-
-  await restaurant.save();
-
-  return res.status(200).json({ message: "Review added successfully", review });
-};
-
 exports.getCheckout = async (req, res, next) => {
   const userId = req.userId;
 
