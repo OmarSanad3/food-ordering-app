@@ -15,7 +15,7 @@ const restaurantSchema = new Schema({
   reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
   tags: [{ type: String }],
   deleviryTime: { type: Number, required: true },
-  offer: { type: String },
+  offer: { type: String },  
   topDish: {
     name: { type: String, required: true },
     image: { type: String, required: true },
@@ -24,13 +24,6 @@ const restaurantSchema = new Schema({
 });
 
 // * ==================== Methods ==================== * //
-
-restaurantSchema.methods.getRating = async function () {
-  return {
-    count: 10,
-    stars: 4.5,
-  };
-};
 
 restaurantSchema.methods.updateTags = async function (tags) {
   this.tags = tags;

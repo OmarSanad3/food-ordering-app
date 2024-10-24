@@ -11,6 +11,7 @@ module.exports.addRestaurant = async (req, res, next) => {
     deleviryTime,
     topDish,
     offer,
+    tags,
   } = req.body;
 
   const restaurant = new Restaurant({
@@ -21,7 +22,8 @@ module.exports.addRestaurant = async (req, res, next) => {
     cheapestMeal,
     deleviryTime,
     topDish,
-    offer,
+    offer, // not required
+    tags, // not required
   });
 
   try {
@@ -63,6 +65,42 @@ module.exports.addMeal = async (req, res, next) => {
     restaurant.meals.push(meal);
     await restaurant.save();
     res.status(201).json({ message: "Meal added successfully", meal });
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
+module.exports.editRestaurant = async (req, res, next) => {
+  const { restaurantId } = req.params;
+
+  const {
+    name,
+    logo,
+    location,
+    smallDescription,
+    cheapestMeal,
+    deleviryTime,
+    topDish,
+    offer,
+    tags,
+  } = req.body;
+
+  const restaurant = await Restaurant.findById(restaurantId);
+
+  restaurant.name = name || restaurant.name;
+  restaurant.logo = logo || restaurant.logo;
+  restaurant.location = location || restaurant.location;
+  restaurant.smallDescription = smallDescription || restaurant.smallDescription;
+  restaurant.cheapestMeal = cheapestMeal || restaurant.cheapestMeal;
+  restaurant.deleviryTime = deleviryTime || restaurant.deleviryTime;
+  restaurant.topDish = topDish || restaurant.topDish;
+  restaurant.offer = offer || restaurant.offer;
+  restaurant.tags = tags || restaurant.tags;
+
+  try {
+    await restaurant.save();
+    restaurant._id = restaurant._id.toString();
+    res.status(201).json({ restaurant });
   } catch (error) {
     res.status(500).json({ error });
   }

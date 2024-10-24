@@ -19,5 +19,57 @@ body: {
 }
 
 ------------------------------------------
+------------------------------------------
 
 
+GET
+http://localhost:3000/cart
+headers: {
+    'Authorization': token
+}
+
+------------------------------------------
+
+POST
+http://localhost:3000/add-to-cart
+headers: {
+    'Authorization': token
+}
+body: {
+    mealId: ""
+}
+
+------------------------------------------
+
+DELETE
+http://localhost:3000/remove-from-cart/:mealId
+headers: {
+    'Authorization': token
+}
+body: {
+    mealId: ""
+}
+
+------------------------------------------
+
+DELETE
+http://localhost:3000/clear-cart
+headers: {
+    'Authorization': token
+}
+
+------------------------------------------
+
+GET
+http://localhost:3000/orders
+headers: {
+    'Authorization': token
+}
+
+------------------------------------------
+
+POST
+http://localhost:3000/order
+headers: {
+    'Authorization': token
+}
