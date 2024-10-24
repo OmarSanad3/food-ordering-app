@@ -28,26 +28,26 @@ export default function Register() {
       .required("Name is Required")
       .min(3, "must be more than 3 chars")
       .max(10, "must be less than 10"),
-    // phone: yup
-    //   .string()
-    //   .required("phone is required")
-    //   .length(11, "must be 11 digit"),
+    phone: yup
+      .string()
+      .required("phone is required")
+      .length(11, "must be 11 digit"),
     email: yup
       .string()
       .required("email is required")
       .email("enter avalid email"),
     password: yup.string().required("password is required").min(6).max(12),
-    // rePassword: yup
-    //   .string()
-    //   .required("Repassword is required")
-    //   .oneOf([yup.ref("password")], "Passwords must match"),
+    rePassword: yup
+      .string()
+      .required("Repassword is required")
+      .oneOf([yup.ref("password")], "Passwords must match"),
   });
   const userData = {
 
     firstName: "",
     lastName: "",
     email: "",
-    // phone:"",
+    phone:"",
     password: ""
   };
   async function sendUserData(values) {
@@ -140,7 +140,7 @@ export default function Register() {
           <div className="alert alert-danger">{myFormik.errors.email}</div>
         )}
 
-        {/* <input
+        <input
           onChange={myFormik.handleChange}
           onBlur={myFormik.handleBlur}
           value={myFormik.values.phone}
@@ -151,7 +151,7 @@ export default function Register() {
         />
         {myFormik.errors.phone && myFormik.touched.phone && (
           <div className="alert alert-danger">{myFormik.errors.phone}</div>
-        )} */}
+        )}
 
         <input
           onChange={myFormik.handleChange}
@@ -166,7 +166,7 @@ export default function Register() {
           <div className="alert alert-danger">{myFormik.errors.password}</div>
         )}
 
-        {/* <input
+        <input
           onChange={myFormik.handleChange}
           onBlur={myFormik.handleBlur}
           value={myFormik.values.rePassword}
@@ -177,7 +177,7 @@ export default function Register() {
         />
         {myFormik.errors.rePassword && myFormik.touched.rePassword && (
           <div className="alert alert-danger">{myFormik.errors.rePassword}</div>
-        )} */}
+        )}
 
         <button
           type="submit"

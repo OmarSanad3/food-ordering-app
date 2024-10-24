@@ -6,6 +6,8 @@ import Menu from "../pages/Menu/Menu";
 import Register from "../pages/Register/Register";
 import Login from "../pages/Login/Login";
 import Error from "../pages/Error/Error";
+import UserInfo from "../components/userInfo/UserInfo";
+import Payment from "../components/Payment/Payment";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -22,6 +24,14 @@ const router = createBrowserRouter([
       {
         path: "/restaurant/:id",
         element: <Menu />,
+      },
+      {
+        path: "/userinfo",
+        element: <UserInfo />,
+      },
+      {
+        path: "/payment",
+        element: <Payment />,
       },
       {
         path:"/Register",element:<Register/>

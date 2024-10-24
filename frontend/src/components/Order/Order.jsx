@@ -3,13 +3,19 @@ import { useContext, useEffect } from "react";
 
 import img from "../../assets/dish1.webp";
 import { cartContext } from "../../context/AddToCartContext";
+import toast from "react-hot-toast";
 
 export default function Order({ mealId,title, image, description, price}) {
-  const { addToCart } = useContext(cartContext);
+  const { addToCart ,decreamentFromCart, deleteCart} = useContext(cartContext);
 
   function addProduct() {
     addToCart(mealId);
     console.log("Product added to cart:", mealId);
+    
+  }
+  function deleteProduct() {
+    decreamentFromCart(mealId);
+    console.log("Product deleted from cart:", mealId);
   }
 
 
@@ -26,6 +32,10 @@ export default function Order({ mealId,title, image, description, price}) {
           <i
             className="bi bi-plus-circle-fill text-warning"
             onClick={() => addProduct()}
+          ></i>
+          <i
+            className="bi bi-minus-circle-fill text-warning"
+            onClick={() => deleteProduct()}
           ></i>
         </div>
       </div>
