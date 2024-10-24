@@ -47,20 +47,16 @@ router.post(
       .isLength({ min: 5 })
       .withMessage("Password must be at least 5 characters long.")
   ],
-  userController.login);
+  userController.login
+);
 
 router.get("/cart", isAuth, userController.getCart);
 
 router.get("/orders", isAuth, userController.getOrders);
 
-// router.get('/checkout', isAuth, userController.getCheckout);
-
 router.post("/add-review", isAuth, userController.addReview);
 
-
 router.post("/add-to-cart", isAuth, userController.addToCart);
-
-router.post("/order", isAuth, userController.addOrder);
 
 router.delete(
   "/remove-from-cart/:mealId",
@@ -70,4 +66,9 @@ router.delete(
 
 router.delete("/clear-cart", isAuth, userController.clearCart);
 
+router.get('/checkout', isAuth, userController.getCheckout);
+
 module.exports = router;
+
+// 4242 4242 4242
+// and data 999
