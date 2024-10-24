@@ -5,6 +5,9 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user.model");
 const Meal = require("../models/meal.model");
 const Order = require("../models/order.model");
+const Restaurant = require("../models/restaurant.model");
+const Review = require("../models/review.model");
+
 // const stripe = require('stripe')('sk_test_51QD6qNDntxRgMHhGwYb7wc61SfMlvx4M8v0giXpzEuqQKdaAyRbykU2uYD5Bf5hNDdvZxSQl9RC0eTklpH40aIwT00rggDr27l');
 
 exports.login = async (req, res, next) => {
@@ -36,7 +39,11 @@ exports.login = async (req, res, next) => {
       { expiresIn: "1h" }
     );
 
-    res.status(200).json({ token: token, userId: user._id.toString() });
+    res.status(200).json({
+      message: "Logged In Successfully",
+      token,
+      userId: user._id.toString(),
+    });
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;
@@ -49,26 +56,47 @@ exports.signup = async (req, res, next) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    const error = new Error("Validation failed.");
+    const e = errors.array();
+    const error = new Error(e[0].msg);
     error.statusCode = 422;
-    error.data = errors.array();
     return next(error);
   }
 
-  const { firstName, lastName, email, password } = req.body;
+  const { firstName, lastName, email, phoneNumber, password, confirmPassword } =
+    req.body;
+
+  if (password != confirmPassword) {
+    const error = new Error("Password and confirm password do not match");
+    error.statusCode = 404;
+    return next(error);
+  }
 
   try {
     const hashedPw = await bcrypt.hash(password, 12);
+
     const user = new User({
       firstName,
       lastName,
       email,
+      phoneNumber,
       password: hashedPw,
+      confirmPassword: hashedPw,
     });
 
-    const result = await user.save();
+    await user.save();
 
-    res.status(201).json({ message: "User created!", userId: result._id });
+    const token = jwt.sign(
+      {
+        email: user.email,
+        userId: user._id.toString(),
+      },
+      "this_is_secret_key",
+      { expiresIn: "1h" }
+    );
+
+    res
+      .status(201)
+      .json({ message: "User created!", token, userId: user._id.toString() });
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;

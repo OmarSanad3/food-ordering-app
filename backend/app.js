@@ -9,6 +9,7 @@ dotenv.config({ path: "./config.env" });
 const adminRoutes = require("./routes/admin.routes");
 const restaurantRoutes = require("./routes/restaurant.routes");
 const userRoute = require("./routes/user.routes");
+const reviewRoutes = require("./routes/review.routes");
 
 const DB_URI = process.env.DB_URI;
 
@@ -29,12 +30,12 @@ app.use((req, res, next) => {
 app.use(userRoute);
 app.use(restaurantRoutes);
 app.use("/admin", adminRoutes);
+app.use(reviewRoutes);
 
 app.use((error, req, res, next) => {
   const status = error.statusCode || 500;
   const message = error.message;
-  const data = error.data;
-  res.status(status).json({ message, data });
+  res.status(status).json({ message });
 });
 
 mongoose
@@ -46,7 +47,6 @@ mongoose
     });
   })
   .catch();
-
 
 /* 
 
