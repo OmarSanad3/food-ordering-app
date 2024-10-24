@@ -75,13 +75,11 @@ module.exports.getRestaurant = async (req, res, next) => {
     .populate("meals")
     .populate("reviews");
 
-  // ====================
+    const reviewsArray = restaurant.reviews;
 
-  const reviewsArray = restaurant.reviews;
-  const reviews = {
-    count: reviewsArray.length,
-    reviews: reviewsArray,
-  };
+    const rating = getRatingObject(reviewsArray);
+
+  // ====================
 
   // ====================
 
@@ -99,7 +97,7 @@ module.exports.getRestaurant = async (req, res, next) => {
 
   // ====================
 
-  const stars = await restaurant.getRating().stars;
+  const stars = rating.stars;
 
   restaurant = {
     _id: restaurant._id,
@@ -112,7 +110,7 @@ module.exports.getRestaurant = async (req, res, next) => {
     tags: restaurant.tags,
     stars: stars,
     menu: meals,
-    reviews: reviews,
+    reviews: reviewsArray,
     offer: restaurant.offer,
     topDish: restaurant.topDish,
   };
