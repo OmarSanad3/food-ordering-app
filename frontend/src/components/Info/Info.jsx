@@ -9,7 +9,7 @@ export default function Info({name , cheapestMealPrice , deliveryTime , stars , 
         <hr />
         <div className="col-md-12 d-flex justify-content-between">
           <p className="fs-5 ">Minmum Order Amount :</p>
-          <span>EGP {cheapestMealPrice}.00</span>
+          <span>EGP {cheapestMealPrice}</span>
         </div>
         <hr />
         <div className="col-md-12 d-flex justify-content-between">

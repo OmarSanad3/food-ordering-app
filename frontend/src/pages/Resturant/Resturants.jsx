@@ -5,6 +5,7 @@ import { useContext, useState, useCallback, useEffect } from "react";
 import { AppContext } from "../../context/AppContext";
 import Loader from "../../components/Loader/Loader";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 function RestaurantPage() {
   const { search } = useContext(AppContext);
@@ -12,21 +13,23 @@ function RestaurantPage() {
   const [selectedOption, setSelectedOption] = useState("Popular");
   const [selectedDish, setSelectedDish] = useState("All");
   const [sortedCards, setSortedCards] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const { id } = useParams();
 
   async function getProducts() {
-    await axios
-      .get(`http://localhost:3000/restaurants`)
-      .then((res) => {
-        setSortedCards(res.data.restaurants);
-        console.log(res.data.restaurants);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    setLoading(true);
+    try {
+      const res = await axios.get(`http://localhost:3000/restaurants/${id}`);
+      setSortedCards(res.data.restaurants);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
   }
   useEffect(() => {
     getProducts();
-  }, []);
+  }, [id]);
 
   const handleSortChange = useCallback(
     (option) => {
@@ -62,6 +65,10 @@ function RestaurantPage() {
 
   const filteredCards = filterCards(sortedCards, selectedDish, search);
 
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
     <div className="row restaurant-page mt-5">
       <div className="col-2">
@@ -78,19 +85,22 @@ function RestaurantPage() {
           {filteredCards.length > 0 ? (
             filteredCards.map((restaurant) => (
               <div className="col" key={restaurant._id}>
-                <Link to={`/restaurant/${restaurant._id}`}>
+                <Link to={`/restaurant/menu/${restaurant._id}`}>
                   <Card
                     title={restaurant.title}
                     stars={restaurant.rating.stars}
                     reviews={restaurant.rating.reviewsCount}
                     deliveryTime={restaurant.deleviryTime}
                     location={restaurant.location}
+                    offer={restaurant.offer}
+                    img={restaurant.topDish.image}
+                    price={restaurant.topDish.price}
                   />
                 </Link>
               </div>
             ))
           ) : (
-            <Loader />
+            <h1>No Restaurants Found</h1>
           )}
         </div>
         {filteredCards.length > 0 && (
