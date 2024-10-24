@@ -10,7 +10,6 @@ import axios from "axios";
 
 export default function Menu() {
   const [selectedTab, setSelectedTab] = useState("menu");
-  // const {addToCart}=useContext(cartContext)
   const [productsDetails, setproductsDetails] = useState([]);
   const { id } = useParams();
 
@@ -128,14 +127,14 @@ export default function Menu() {
               </div>
             ) : selectedTab === "reviews" ? (
               <div className="col-md-12 col-lg-9">
-                {productsDetails.reviews.reviews.map((review, index) => {
+                {productsDetails.reviews.map((review) => {
                   return (
                     <Reviews
-                      key={index}
+                      key={review._id}
                       stars={review.stars}
-                      username={review.username}
+                      username={review.user}
                       feedback={review.feedback}
-                      date={review.date.toDateString()}
+                      // date={review.date.toDateString()}
                     />
                   );
                 })}

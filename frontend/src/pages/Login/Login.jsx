@@ -42,7 +42,7 @@ export default function Login() {
       localStorage.setItem("tkn",res.data.token)
       seterrMessage(undefined);
       setTimeout(function () {
-        navigate("/resturants");
+        navigate("/");
       }, 1000);
     } catch (e) {
       if (e.response && e.response.status === 409) {
