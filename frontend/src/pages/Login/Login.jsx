@@ -50,7 +50,8 @@ export default function Login() {
         setisPost(false);
       } else {
         console.log("errorrrrr", e);
-        seterrMessage(e);
+        seterrMessage(e.response.data.message);
+
       }
     }
     setIsLoading(false);

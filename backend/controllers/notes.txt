@@ -68,8 +68,15 @@ headers: {
 
 ------------------------------------------
 
-POST
-http://localhost:3000/order
+
+GET
+http://localhost:3000/checkout
 headers: {
     'Authorization': token
 }
+
+
+if payment successfully paid so it will navigate to '/order' and clear the cart and post order (add the order to the user collection and also add it to order collection)
+but if it cancelled it will navigate to the main domain (should be something else)
+
+to test payment methis enter in the card information (4242 4242 4242 4242) and fill the other inputs and press pay
