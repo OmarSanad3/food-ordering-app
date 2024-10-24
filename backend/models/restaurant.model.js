@@ -25,13 +25,6 @@ const restaurantSchema = new Schema({
 
 // * ==================== Methods ==================== * //
 
-restaurantSchema.methods.getRating = async function () {
-  return {
-    count: 10,
-    stars: 4.5,
-  };
-};
-
 restaurantSchema.methods.updateTags = async function (tags) {
   this.tags = tags;
   return await this.save();

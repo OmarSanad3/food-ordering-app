@@ -43,10 +43,15 @@ module.exports.getRestaurantsInLocation = async (req, res, next) => {
 
   restaurants = await Promise.all(
     restaurants.map(async (restaurant) => {
+      const theRestaurant = await restaurant.populate("reviews");
+      const reviewsArray = theRestaurant.reviews;
+
+      const rating = getRatingObject(reviewsArray);
+
       return {
         _id: restaurant._id,
         title: restaurant.name,
-        rating: await restaurant.getRating(),
+        rating: rating,
         location: restaurant.location,
         smallDescription: restaurant.smallDescription,
         tags: restaurant.tags,
@@ -66,7 +71,9 @@ module.exports.getRestaurantsInLocation = async (req, res, next) => {
 module.exports.getRestaurant = async (req, res, next) => {
   const { restaurantId } = req.params;
 
-  let restaurant = await Restaurant.findById(restaurantId).populate("meals").populate("reviews");
+  let restaurant = await Restaurant.findById(restaurantId)
+    .populate("meals")
+    .populate("reviews");
 
   // ====================
 
