@@ -21,7 +21,7 @@ export default function Login() {
       .string()
       .required("email is required")
       .email("enter avalid email"),
-    password: yup.string().required("password is required").min(6).max(12),
+    password: yup.string().required("password is required").min(5),
   });
   const userData = {
     email: "",
@@ -32,7 +32,7 @@ export default function Login() {
     setIsLoading(true);
     try {
      const res= await axios.post(
-        "https://ecommerce.routemisr.com/api/v1/auth/signin",
+        "http://localhost:3000/login",
         values
       );
       
@@ -45,13 +45,12 @@ export default function Login() {
         navigate("/");
       }, 1000);
     } catch (e) {
-      if (e.response && e.response.status === 409) {
-        console.log(e.response.data.message);
-        seterrMessage(e.response.data.message);
+      if (e.response && e.response.status === 422) {
+        seterrMessage("This account is already exist"); 
         setisPost(false);
       } else {
         console.log("errorrrrr", e);
-        seterrMessage(e.response.data.message);
+        seterrMessage(e);
       }
     }
     setIsLoading(false);
