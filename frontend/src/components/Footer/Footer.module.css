@@ -1,0 +1,48 @@
+.footer {
+    /* background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="%23DCE2F0"><path d="M0 0v100c166.7 0 166.7-66 333.3-66S500 77 666.7 77 833.3 28 1000 28V0H0Z" opacity=".5"></path><path d="M0 0v100c166.7 0 166.7-66 333.3-66S500 70 666.7 70 833.3 16 1000 16V0H0Z" opacity=".5"></path><path d="M0 0v100c166.7 0 166.7-66 333.3-66S500 63 666.7 63 833.3 4 1000 4V0H0Z"></path></svg>'); */
+    background-size: cover;
+    background-color: #e6bc406e;
+    /* background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="%23E6BC40FF"><path d="M0 0v4c250 0 250 96 500 96S750 4 1000 4V0H0Z"></path></svg>'); */
+    color: black !important;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="%23FFFFFF"><path d="M0 0v100-79.4a1892 1892 0 0 1 500 0l500 66.7V0H0Z"></path></svg>');
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="%23FFFFFF"><path d="M0 0v4c154 96 190 17.9 300 17.9 92 0 92 78.1 200 78.1s108-78.2 200-78.2c110 0 146 78.2 300-17.8V0H0Z"></path></svg>');
+}
+
+.footer ul li {
+    cursor: pointer;
+}
+
+.footer ul li:hover {
+    color: #e6ad03d4;
+}
+
+.button {
+    border: 1px solid black !important;
+}
+
+.title {
+    position: relative;
+    /* width: 50%; */
+    /* border-bottom: 2px solid #e6ad03; */
+}
+
+.title::after {
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 1px;
+    background-color: #e6ad03d4;
+    bottom: 0;
+    left: 0;
+    transform: translate(50%);
+}
+
+.contact .email {
+    border: 1px solid #e6ad03;
+}
+
+.row1 {
+    position: relative;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e6ad03;
+}

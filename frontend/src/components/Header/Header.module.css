@@ -4,3 +4,12 @@
 .logo img {
   height: 40px;
 }
+.searchInput {
+  transition: border-color 0.3s ease;
+}
+
+.searchInput:focus {
+  border-color: #ffc108ff;
+  box-shadow: 0 0 5px rgba(255, 193, 8, 0.37);
+  outline: none;
+}

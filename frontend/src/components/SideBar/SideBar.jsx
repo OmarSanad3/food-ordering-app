@@ -1,86 +1,62 @@
-export default function SideBar() {
+import styles from "./SideBar.module.css";
+
+const dishes = ["All", "Pizza", "Burger", "Shawerma", "Koshary", "Sushi"];
+const sortingOptions = ["Popular", "Rating", "Delivery"];
+
+export default function SideBar({
+  selectedOption,
+  selectedDish,
+  handleSortChange,
+  handleSelectDish,
+}) {
   return (
     <div
-      className="d-flex flex-column flex-shrink-0 p-3 text-bg-dark "
-      style={{ width: "280px" }}
+      className={`d-none d-lg-flex flex-column flex-shrink-0 p-3 text ${styles.SideBar} `}
     >
-      <a
-        href="/"
-        className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none "
-      >
-        <span className="fs-4">Sidebar</span>
-      </a>
+      <span className="fs-5 text-black-50">Show results for:</span>
+      <hr />
+
+      <ul className="nav nav-pills flex-column mb-auto">
+        <p className="fw-bold ">Sorted By:</p>
+
+        {sortingOptions.map((option) => (
+          <div className="form-check" key={option}>
+            <input
+              className={`form-check-input ${styles.formCheckInput}`}
+              type="radio"
+              name="Sorted"
+              id={option}
+              checked={selectedOption === option}
+              onChange={() => handleSortChange(option)}
+            />
+            <label className="form-check-label text-black-50" htmlFor={option}>
+              {option === "Delivery" ? "Delivery Time" : option}
+            </label>
+          </div>
+        ))}
+      </ul>
+
+      {/* <button className="btn btn-warning mt-3 p-1">Apply</button> */}
       <hr />
       <ul className="nav nav-pills flex-column mb-auto">
-        <li className="nav-item">
-          <a href="#" className="nav-link active" aria-current="page">
-            Home
-          </a>
-        </li>
-        <li>
-          <a href="#" className="nav-link text-white">
-            Dashboard
-          </a>
-        </li>
-        <li>
-          <a href="#" className="nav-link text-white">
-            Orders
-          </a>
-        </li>
-        <li>
-          <a href="#" className="nav-link text-white">
-            Products
-          </a>
-        </li>
-        <li>
-          <a href="#" className="nav-link text-white">
-            Customers
-          </a>
-        </li>
+        <p className="fw-bold ">Dishes:</p>
+
+        {dishes.map((dish) => (
+          <div className="form-check" key={dish}>
+            <input
+              className={`form-check-input ${styles.formCheckInput}`}
+              onChange={() => handleSelectDish(dish)}
+              type="radio"
+              name="Dishes"
+              id={dish}
+              checked={selectedDish === dish}
+            />
+            <label className="form-check-label text-black-50" htmlFor={dish}>
+              {dish}
+            </label>
+          </div>
+        ))}
       </ul>
-      <hr />
-      <div className="dropdown">
-        <a
-          href="#"
-          className="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          <img
-            src="https://github.com/mdo.png"
-            alt=""
-            width="32"
-            height="32"
-            className="rounded-circle me-2"
-          />
-          <strong>mdo</strong>
-        </a>
-        <ul className="dropdown-menu dropdown-menu-dark text-small shadow">
-          <li>
-            <a className="dropdown-item" href="#">
-              New project...
-            </a>
-          </li>
-          <li>
-            <a className="dropdown-item" href="#">
-              Settings
-            </a>
-          </li>
-          <li>
-            <a className="dropdown-item" href="#">
-              Profile
-            </a>
-          </li>
-          <li>
-            <hr className="dropdown-divider" />
-          </li>
-          <li>
-            <a className="dropdown-item" href="#">
-              Sign out
-            </a>
-          </li>
-        </ul>
-      </div>
     </div>
   );
 }
