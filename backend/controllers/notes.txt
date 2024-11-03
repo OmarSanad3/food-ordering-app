@@ -1,0 +1,75 @@
+POST
+http://localhost:3000/signup
+headers: { 'Content-Type': 'application/json' },
+body: {
+    firstName: the data user entered,
+    lastName: the data user entered,
+    email: the data user entered,
+    password: the data user entered,
+}
+
+------------------------------------------
+
+POST
+http://localhost:3000/login
+headers: { 'Content-Type': 'application/json' },
+body: {
+    email: the data user entered,
+    password: the data user entered,
+}
+
+------------------------------------------
+------------------------------------------
+
+
+GET
+http://localhost:3000/cart
+headers: {
+    'Authorization': token
+}
+
+------------------------------------------
+
+POST
+http://localhost:3000/add-to-cart
+headers: {
+    'Authorization': token
+}
+body: {
+    mealId: ""
+}
+
+------------------------------------------
+
+DELETE
+http://localhost:3000/remove-from-cart/:mealId
+headers: {
+    'Authorization': token
+}
+body: {
+    mealId: ""
+}
+
+------------------------------------------
+
+DELETE
+http://localhost:3000/clear-cart
+headers: {
+    'Authorization': token
+}
+
+------------------------------------------
+
+GET
+http://localhost:3000/orders
+headers: {
+    'Authorization': token
+}
+
+------------------------------------------
+
+POST
+http://localhost:3000/order
+headers: {
+    'Authorization': token
+}

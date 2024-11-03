@@ -1,15 +1,37 @@
 import classes from "./Home.module.css";
-import { Link } from "react-router-dom";
-import img from "../../assets/dish1.jpg";
+import {  useNavigate } from "react-router-dom";
+import { useState } from "react";
+import img from "../../assets/dish1.webp";
+import axios from "axios";
 export default function Home() {
+  const [selectedOption, setSelectedOption] = useState("Cairo");
+  const navigate = useNavigate();
+
+  const handleSelectChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
+  
+  const handleSearch = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.get(`http://localhost:3000/restaurants/${selectedOption}`);
+      if (response.data) {
+        navigate(`/restaurants/${selectedOption}`);
+      } else {
+        console.log('Restaurant not found');
+      }
+    } catch (error) {
+      console.error('Error fetching restaurant data:', error);
+    }
+  };
   return (
     <div className="container">
       <div className={classes.overlay}>
-        <div className = {classes.backgoundImage}>
+        <div className={classes.backgroundImage}>
           <img src={img} alt="dish" />
         </div>
         <div className={`${classes.maxWidth} text-center text-light`}>
-          <h1 className={`fw-bold mt-5 pt-5 ${classes.sectionTitle}`}>
+          <h1 className={`fw-bold mt-md-5 pt-5 ${classes.sectionTitle}`}>
             Discover & Order the food you love.
           </h1>
         </div>
@@ -30,19 +52,23 @@ export default function Home() {
               <select
                 className="form-select"
                 aria-label="Default select example"
+                value={selectedOption}
+                onChange={handleSelectChange}
               >
-                <option selected>City</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                <option value="Cairo">Cairo</option>
+                <option value="Port-Said">Portsaid</option>
+                <option value="Alexandria">Alexandria</option>
+                <option value="Elmansura">Elmansura</option>
               </select>
             </div>
             <div className="col-md-2 col-lg-1 col-sm-2">
-              <button className="btn btn-warning " type="submit">
-                <Link className="nav-link" to="/resturants">
+                <button
+                  className="btn btn-warning"
+                  type="button"
+                  onClick={handleSearch}
+                >
                   Search
-                </Link>
-              </button>
+                </button>
             </div>
           </div>
         </div>

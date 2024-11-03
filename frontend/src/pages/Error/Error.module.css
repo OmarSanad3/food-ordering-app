@@ -1,0 +1,21 @@
+/* Error.module.css */
+.errorContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #ffeb3b; /* Yellow background */
+  color: #000; /* Black text */
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.continer .P p {
+  font-size: 5rem !important;
+  font-weight: bold;
+}
+
+.errorMessage {
+  font-size: 2rem;
+  font-weight: bold;
+}
