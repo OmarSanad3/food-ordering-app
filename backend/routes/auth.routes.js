@@ -2,7 +2,7 @@ const express = require("express");
 const { body } = require("express-validator");
 
 const User = require("../models/user.model");
-const userController = require("../controllers/user.controller");
+const userController = require("../controllers/auth.controller");
 const isAuth = require("../middleware/is-auth");
 
 const router = express.Router();
@@ -35,24 +35,19 @@ router.post(
   userController.signup
 );
 
-router.get("/cart", isAuth, userController.getCart);
-
-router.get("/orders", isAuth, userController.getOrders);
-
-// router.get('/checkout', isAuth, userController.getCheckout);
-
-router.post("/login", userController.login);
-
-router.post("/add-to-cart", isAuth, userController.addToCart);
-
-router.post("/order", isAuth, userController.addOrder);
-
-router.delete(
-  "/remove-from-cart/:mealId",
-  isAuth,
-  userController.removeFromCart
+router.post(
+  "/login", 
+  [
+    body("email")
+      .isEmail()
+      .withMessage("Please enter a valid email.")
+      .normalizeEmail(),
+    body("password")
+      .trim()
+      .isLength({ min: 5 })
+      .withMessage("Password must be at least 5 characters long.")
+  ],
+  userController.login
 );
-
-router.delete("/clear-cart", isAuth, userController.clearCart);
 
 module.exports = router;

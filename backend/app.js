@@ -1,15 +1,17 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-
 const dotenv = require("dotenv");
 
 dotenv.config({ path: "./config.env" });
 
 const adminRoutes = require("./routes/admin.routes");
 const restaurantRoutes = require("./routes/restaurant.routes");
-const userRoute = require("./routes/user.routes");
+const authRoutes = require("./routes/auth.routes");
 const reviewRoutes = require("./routes/review.routes");
+const cartRoutes = require("./routes/cart.routes");
+const orderRoutes = require("./routes/order.routes")
+
 
 const DB_URI = process.env.DB_URI;
 
@@ -27,10 +29,12 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(userRoute);
+app.use(authRoutes);
 app.use(restaurantRoutes);
 app.use("/admin", adminRoutes);
 app.use(reviewRoutes);
+app.use(cartRoutes);
+app.use(orderRoutes);
 
 app.use((error, req, res, next) => {
   const status = error.statusCode || 500;

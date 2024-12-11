@@ -18,52 +18,62 @@ export default function Register() {
 
 
   const mySchema = yup.object({
-    name: yup
+    firstName:yup
       .string()
       .required("Name is Required")
       .min(3, "must be more than 3 chars")
       .max(10, "must be less than 10"),
-    phone: yup
+      lastName:yup
       .string()
-      .required("phone is required")
+      .required("Name is Required")
+      .min(3, "must be more than 3 chars")
+      .max(10, "must be less than 10"),
+    phoneNumber: yup
+      .string()
+      .required("phoneNumber is required")
       .length(11, "must be 11 digit"),
     email: yup
       .string()
       .required("email is required")
       .email("enter avalid email"),
     password: yup.string().required("password is required").min(6).max(12),
-    rePassword: yup
+    confirmPassword: yup
       .string()
       .required("Repassword is required")
       .oneOf([yup.ref("password")], "Passwords must match"),
   });
   const userData = {
-    name: "",
+
+    firstName: "",
+    lastName: "",
     email: "",
-    phone: "",
+    phoneNumber:"",
     password: "",
-    rePassword: "",
+    confirmPassword:""
   };
   async function sendUserData(values) {
     setIsLoading(true);
     try {
       const res=await axios.post(
-        "https://ecommerce.routemisr.com/api/v1/auth/signup",
+        "http://localhost:3000/signup",
         values
       );
       localStorage.setItem("tkn",res.data.token)
       setToken(res.data.token)
+      console.log("res",res);
       setisPost(true);
       seterrMessage(undefined);
       setTimeout(function () {
-        navigate("/resturants");
+        navigate("/");
       }, 1000);
     } catch (e) {
-      if (e.response && e.response.status === 409) {
-        seterrMessage(e.response.data.message); // Conflict: User already exists
+      console.log(e);
+      
+      if (e.response && e.response.status === 422) {
+        seterrMessage("This account is already exist"); 
         setisPost(false);
       } else {
-        console.log("error", e);
+        console.log("error resons", e.response.data.data[0].msg);
       }
     }
     setIsLoading(false);
@@ -97,14 +107,26 @@ export default function Register() {
         <input
           onChange={myFormik.handleChange}
           onBlur={myFormik.handleBlur}
-          value={myFormik.values.name}
+          value={myFormik.values.firstName}
           type="text"
-          id="name"
-          placeholder="Enter your name"
+          id="firstName"
+          placeholder="Enter your firstName"
           className="form-control mb-4"
         />
-        {myFormik.errors.name && myFormik.touched.name && (
-          <div className="alert alert-danger">{myFormik.errors.name}</div>
+        {myFormik.errors.firstName && myFormik.touched.firstName && (
+          <div className="alert alert-danger">{myFormik.errors.firstName}</div>
+        )}
+        <input
+          onChange={myFormik.handleChange}
+          onBlur={myFormik.handleBlur}
+          value={myFormik.values.lastName}
+          type="text"
+          id="lastName"
+          placeholder="Enter your lastName"
+          className="form-control mb-4"
+        />
+        {myFormik.errors.firstName && myFormik.touched.lastName && (
+          <div className="alert alert-danger">{myFormik.errors.lastName}</div>
         )}
 
         <input
@@ -123,14 +145,14 @@ export default function Register() {
         <input
           onChange={myFormik.handleChange}
           onBlur={myFormik.handleBlur}
-          value={myFormik.values.phone}
+          value={myFormik.values.phoneNumber}
           type="text"
-          id="phone"
-          placeholder="Enter your phone number"
+          id="phoneNumber"
+          placeholder="Enter your phoneNumber number"
           className="form-control mb-4"
         />
-        {myFormik.errors.phone && myFormik.touched.phone && (
-          <div className="alert alert-danger">{myFormik.errors.phone}</div>
+        {myFormik.errors.phoneNumber && myFormik.touched.phoneNumber && (
+          <div className="alert alert-danger">{myFormik.errors.phoneNumber}</div>
         )}
 
         <input
@@ -149,14 +171,14 @@ export default function Register() {
         <input
           onChange={myFormik.handleChange}
           onBlur={myFormik.handleBlur}
-          value={myFormik.values.rePassword}
+          value={myFormik.values.confirmPassword}
           type="password"
-          id="rePassword"
+          id="confirmPassword"
           placeholder="Re-enter your password"
           className="form-control mb-4"
         />
-        {myFormik.errors.rePassword && myFormik.touched.rePassword && (
-          <div className="alert alert-danger">{myFormik.errors.rePassword}</div>
+        {myFormik.errors.confirmPassword && myFormik.touched.confirmPassword && (
+          <div className="alert alert-danger">{myFormik.errors.confirmPassword}</div>
         )}
 
         <button

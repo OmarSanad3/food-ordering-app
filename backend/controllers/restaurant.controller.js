@@ -1,6 +1,7 @@
 const Restaurant = require("../models/restaurant.model");
 const Review = require("../models/review.model"); // * used in populate
 const Meal = require("../models/meal.model"); // * used in populate
+const User = require("../models/user.model");
 
 const { getRatingObject } = require("../util/restaurant");
 
@@ -75,13 +76,9 @@ module.exports.getRestaurant = async (req, res, next) => {
     .populate("meals")
     .populate("reviews");
 
-    const reviewsArray = restaurant.reviews;
+  const reviewsArray = restaurant.reviews;
 
-    const rating = getRatingObject(reviewsArray);
-
-  // ====================
-
-  // ====================
+  const rating = getRatingObject(reviewsArray);
 
   let meals = restaurant.meals;
 
@@ -95,9 +92,23 @@ module.exports.getRestaurant = async (req, res, next) => {
     };
   });
 
-  // ====================
-
   const stars = rating.stars;
+
+  const reviews = await Promise.all(
+    reviewsArray.map(async (review) => {
+      const userData = await User.findById(review.user);
+
+      return {
+        _id: review._id,
+        restaurantId: review.restaurant,
+        stars: review.stars,
+        feedback: review.feedback,
+        createdAt: review.createdAt,
+        updatedAt: review.updatedAt,
+        user: userData.firstName + " " + userData.lastName,
+      };
+    })
+  );
 
   restaurant = {
     _id: restaurant._id,
@@ -110,7 +121,7 @@ module.exports.getRestaurant = async (req, res, next) => {
     tags: restaurant.tags,
     stars: stars,
     menu: meals,
-    reviews: reviewsArray,
+    reviews: reviews,
     offer: restaurant.offer,
     topDish: restaurant.topDish,
   };
